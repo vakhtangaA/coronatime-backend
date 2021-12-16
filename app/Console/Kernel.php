@@ -16,9 +16,11 @@ class Kernel extends ConsoleKernel
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		$schedule->command('command:updateCovidStatistics')->dailyAt('19:02')->after(function () {
+		$schedule->command('command:updateCovidStatistics')->everyMinute()->after(function () {
 			dd('ddsad');
 		});
+		$schedule->command('schedule-monitor:sync')->dailyAt('04:56');
+		$schedule->command('schedule-monitor:clean')->daily();
 	}
 
 	/**
