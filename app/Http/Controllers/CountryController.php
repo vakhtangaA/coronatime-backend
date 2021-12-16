@@ -23,7 +23,7 @@ class CountryController extends Controller
 		// 	'https://devtest.ge/countries'
 		// );
 
-		return $response->collect();
+		return view('layout');
 	}
 
 	/**
