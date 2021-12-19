@@ -9,6 +9,9 @@ module.exports = {
             colors: {
                 btnColor: "#0FBA68",
             },
+            backgroundImage: {
+                caseChart: "url(/images/caseCharts.png)",
+            },
         },
     },
     plugins: [],

@@ -32,14 +32,34 @@
   <script>
     0
   </script>
-  {{-- <div x-data="{ open: false }">
-    <button @click="open = ! open">Toggle Content</button>
 
-    <div x-show="open">
-      Content...
+  {{ $slot }}
+
+  @if (session()->has('success'))
+    <div x-data="{show: true, count: 0}"
+         class="flex items-center absolute bottom-4 right-4  bg-green-400 p-3 rounded-md text-white font-semibold"
+         x-init="setTimeout(() => show = false, 4000)"
+         x-show="show">
+      <x-svgs.success />
+      <p class="ml-2 text-xs">
+        {{ session('success') }}
+      </p>
     </div>
-  </div> --}}
-  <livewire:register />
+  @endif
+
+  @if (session()->has('error'))
+    <div x-data="{show: true, count: 0}"
+         class="flex items-center absolute bottom-4 right-4  bg-red-400 p-3 rounded-md text-white font-semibold"
+         x-init="setTimeout(() => show = false, 4000)"
+         x-show="show">
+      <x-svgs.success />
+      <p class="ml-2 text-xs">
+        {{ session('error') }}
+      </p>
+    </div>
+  @endif
+
+
 
   @livewireScripts
 </body>
