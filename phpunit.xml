@@ -16,6 +16,21 @@
         <include>
             <directory suffix=".php">./app</directory>
         </include>
+        <exclude>
+           <file>
+           ./app/Console/Kernel.php
+           </file>
+           <file>
+           ./app/Providers/RouteServiceProvider.php
+           </file>
+           <file>
+            ./app/Exceptions/Handler.php
+           </file>
+           <file>
+            ./app/Exceptions/Handler
+           </file>
+
+        </exclude>
     </coverage>
     <php>
         <server name="APP_ENV" value="testing"/>
