@@ -51,7 +51,6 @@ class updateCovidStatistics extends Command
 				$countryInfo = Http::post('https://devtest.ge/get-country-statistics', [
 					'code' => $country['code'],
 				])->collect();
-				var_dump($countryInfo);
 
 				// if api doesn't respond with country info,
 				// code tries 10 times to retrieve info, on each iteration, sleep time is increased

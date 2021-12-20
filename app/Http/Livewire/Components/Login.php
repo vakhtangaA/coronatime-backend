@@ -14,8 +14,8 @@ class Login extends Component
 	public function rules()
 	{
 		return [
-			'name'      => ['required', 'min:2', 'max:255'],
-			'password'  => ['required', 'min:6', 'max:255'],
+			'name'      => ['required', 'min:3', 'max:255'],
+			'password'  => ['required', 'min:3', 'max:255'],
 		];
 	}
 
@@ -28,9 +28,6 @@ class Login extends Component
 	{
 		$validatedData = $this->validate();
 
-		$credentials = request()->only('name', 'password');
-
-		// dd($validatedData);
 		if (Auth::attempt($validatedData))
 		{
 			// Authentication passed...
