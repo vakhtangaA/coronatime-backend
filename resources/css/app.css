@@ -8,8 +8,10 @@ body {
 
 .x-scroller {
     overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: scroll;
+    height: 500px;
     white-space: nowrap;
+    scroll-behavior: smooth;
 }
 
 .width90 {
