@@ -9,8 +9,6 @@ body {
 .x-scroller {
     overflow-x: scroll;
     overflow-y: hidden;
-    width: 350px;
-    /* margin: 0 2rem; */
     white-space: nowrap;
 }
 

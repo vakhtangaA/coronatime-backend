@@ -1,64 +1,41 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <div class="flex flex-col">
-  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg x-scroller flipped width90">
-        <table class="min-w-full  content divide-y divide-gray-200">
+  <div class="relative w-fit md:my-12">
+    <input wire:model='search'
+           type="search"
+           class="relative md:border border-gray-300 py-4 md:py-3 rounded-md focus:outline-none px-12 w-60 "
+           placeholder="Search by country" />
+    <x-svgs.searchSvg />
+  </div>
+  <div class="overflow-x-auto">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8 m-auto">
+      <div
+           class="md:shadow overflow-hidden border-b border-gray-200 sm:rounded-lg x-scroller lg:overflow-hidden flipped  md:width90 m-auto">
+        <table class="content divide-y divide-gray-200 w-screen ">
           <thead class="bg-gray-100 h-14">
             <tr>
-              <th scope="col"
-                  class="px-6 py-3 text-left text-xs font-extrabold  tracking-wider ">
-                Location
-                {{-- <div class="inline-block ">
-                  <img src="{{ asset('images/arrow-top.png') }}"
-                       class="h-4" />
-                  <img src="{{ asset('images/arrow-down.png') }}" />
-                </div> --}}
-                <x-svgs.sortSvg />
-              </th>
-              <th scope="col"
-                  class="px-6 py-3 text-left text-xs font-extrabold  tracking-wider">
-                New Cases
-                <x-svgs.sortSvg />
-
-              </th>
-              <th scope="col"
-                  class="px-6 py-3 text-left text-xs font-extrabold  tracking-wider">
-                Deaths
-                <x-svgs.sortSvg />
-              </th>
-              <th scope="col"
-                  class="px-6 py-3 text-left text-xs font-extrabold  tracking-wider">
-                Recovered
-                <x-svgs.sortSvg />
-              </th>
-              <th scope="col"
-                  class="px-6 py-3 text-left text-xs font-extrabold  tracking-wider">
-                Critical
-                <x-svgs.sortSvg />
-              </th>
+              <x-utils.tHead text="Location"
+                             term="location" />
+              <x-utils.tHead text="New Cases"
+                             term="cases" />
+              <x-utils.tHead text="Deaths"
+                             term="deaths" />
+              <x-utils.tHead text="Recovered"
+                             term="recovered" />
+              <x-utils.tHead text="Critical"
+                             term="critical" />
             </tr>
           </thead>
           <tbody>
             <!-- Odd row -->
             @foreach ($countries as $country)
 
-              <tr class="bg-white">
-                <td class="px-6 py-4 whitespace-nowrap text-sm  text-gray-900">
-                  {{ $country->name }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ $country->confirmed }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ $country->deaths }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ $country->recovered }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ $country->critical }}
-                </td>
+              <tr class="bg-white"
+                  wire:key='{{ $country->countryCode }}'>
+                <x-utils.tData text="{{ $country->name }}" />
+                <x-utils.tData text="{{ $country->confirmed }}" />
+                <x-utils.tData text="{{ $country->deaths }}" />
+                <x-utils.tData text="{{ $country->recovered }}" />
+                <x-utils.tData text="{{ $country->critical }}" />
               </tr>
             @endforeach
           </tbody>
