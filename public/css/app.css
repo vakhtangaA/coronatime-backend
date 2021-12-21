@@ -489,6 +489,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hidden {
   display: none;
 }
+.h-28 {
+  height: 7rem;
+}
 .h-full {
   height: 100%;
 }
@@ -518,6 +521,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-24 {
   width: 6rem;
+}
+.w-28 {
+  width: 7rem;
 }
 .w-6 {
   width: 1.5rem;
@@ -783,8 +789,8 @@ body {
 
 .x-scroller {
     overflow-x: scroll;
-    overflow-y: scroll;
-    height: 500px;
+    overflow-y: hidden;
+    /* height: 500px; */
     white-space: nowrap;
     scroll-behavior: smooth;
 }
@@ -807,6 +813,10 @@ body {
     height: 1px;
     background-color: beige;
     width: 100%;
+}
+
+html {
+    overflow-y: scroll;
 }
 
 .hover\:text-red-500:hover {
