@@ -7,7 +7,7 @@
       <nav class="flex"
            x-data="{open: false}">
         <select name="choice"
-                class="bg-white w-24 mr-5">
+                class="bg-white w-24 md:mr-5">
           <option value="english">English</option>
           <option value="georgian">Georgian</option>
         </select>

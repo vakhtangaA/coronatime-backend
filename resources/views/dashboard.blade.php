@@ -10,7 +10,7 @@
               Worldwide Statistics
             @endif
           </h1>
-          <nav class="my-6 lg:my-12  hrLine w-full">
+          <nav class="mt-6 lg:my-12  hrLine w-full {{ request()->get('show') !== 'by-country' ? 'my-4' : '' }}">
             <ul class="flex w-48 justify-between">
               <li class="pb-4 {{ request()->get('show') !== 'by-country' ? 'font-bold border-b-4 border-gray-800' : '' }}">
                 <a href="{{ request()->fullUrlWithQuery(['show' => 'worldwide']) }}">
@@ -27,11 +27,11 @@
           </nav>
         </div>
         @if (request()->get('show') === 'by-country')
-          <div>
+          <div class="w-screen md:width90">
             @livewire('components.by-country')
           </div>
         @else
-          <div class=" md:flex w-full justify-between">
+          <div class="md:flex w-full justify-between">
             <div class="relative flex  flex-col justify-center items-center">
               <img class="px-0 w-full md:hidden"
                    src="{{ asset('images/caseCharts.png') }}" />
