@@ -7,7 +7,7 @@
     <x-svgs.searchSvg />
   </div>
   <div class="overflow-x-auto">
-    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8 m-auto">
+    <div class="py-2 align-middle inline-block m-auto">
       <div
            class="md:shadow overflow-hidden border-b border-gray-200 sm:rounded-lg x-scroller lg:overflow-hidden flipped  md:width90 m-auto">
         <table class="content divide-y divide-gray-200 w-screen ">
