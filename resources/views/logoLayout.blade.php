@@ -1,5 +1,5 @@
 <div>
-  <div class="flex items-center justify-between px-4 my-6 md:px-16">
+  <div class="flex items-center justify-between my-6  width90 m-auto">
     <a href="{{ route('dashboard') }}">
       <img src="{{ asset('images/logo.png') }}" />
     </a>
@@ -27,7 +27,7 @@
         @guest
           <ul class="md:flex ml-10 hidden">
             <li class="mr-4 font-semibold underline">
-              <a href="/login">login</a>
+              <a href="{{ route('login') }}">login</a>
             </li>
             <li class="font-semibold underline">
               <a href="{{ route('register') }}">register</a>
@@ -40,12 +40,18 @@
             class="absolute right-3 z-10 top-16 p-3 bg-white shadow-lg border border-gray-100 rounded-lg">
           @auth
             <li>
-              <span>{{ auth()->user()->name }}</span>
+              <form action='{{ route('logout') }}'
+                    method="POST"
+                    class="md:block">
+                @csrf
+                <button type="submit"
+                        class="text-red-400 hover:text-red-500">Log Out</button>
+              </form>
             </li>
           @endauth
           @guest
             <li class="underline font-semibold">
-              <a href="/login">login</a>
+              <a href="{{ route('register') }}">login</a>
             </li>
             <li class="underline font-semibold">
               <a href="{{ route('register') }}">register</a>
