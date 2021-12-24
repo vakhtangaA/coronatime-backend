@@ -1,11 +1,10 @@
 @component('layout')
-  <div class="flex flex-col items-center h-full justify-around"
-       style="margin-top: 4rem; text-align: center">
-    <img src="{{ asset('images/logo.png') }}" />
-    <div class="flex flex-col items-center"
-         style="margin-top: 40%">
+  <div class="flex flex-col items-center justify-around h-screen">
+    <img src="{{ asset('images/logo.png') }}"
+         class="self-start mt-4 ml-6 md:mt-12 md:ml-0 md:self-center" />
+    <div class="flex flex-col items-center m-auto">
       <img src="{{ asset('images/icons8-checked 1.png') }}" />
-      <p style="margin-top: 1rem">
+      <p>
         We have sent you a confirmation email
       </p>
     </div>

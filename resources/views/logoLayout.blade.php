@@ -37,7 +37,8 @@
         <ul x-show="open"
             style="display: none"
             @click.away="open = false"
-            class="absolute right-3 z-10 top-16 p-3 bg-white shadow-lg border border-gray-100 rounded-lg">
+            class="absolute right-3 z-10 top-16
+            h-28 w-28 p-3 bg-white shadow-lg border border-gray-100 rounded-lg">
           @auth
             <li>
               <form action='{{ route('logout') }}'
@@ -50,11 +51,13 @@
             </li>
           @endauth
           @guest
-            <li class="underline font-semibold">
-              <a href="{{ route('register') }}">login</a>
+            <li class=" font-semibold ">
+              <a href="{{ route('register') }}"
+                 class="hover:underline">login</a>
             </li>
-            <li class="underline font-semibold">
-              <a href="{{ route('register') }}">register</a>
+            <li class=" font-semibold">
+              <a class="hover:underline"
+                 href="{{ route('register') }}">register</a>
             </li>
           @endguest
         </ul>

@@ -10,7 +10,7 @@
     <div class="py-2 align-middle inline-block m-auto">
       <div
            class="md:shadow lg:overflow-x-hidden border-b border-gray-200 sm:rounded-lg x-scroller flipped  md:width90 m-auto">
-        <table class="content divide-y divide-gray-200 w-full">
+        <table class="content divide-y divide-gray-200 w-full border border-gray-100 shadow">
           <thead class="bg-gray-100 h-14">
             <tr>
               <x-utils.tHead text="Location"
@@ -25,7 +25,7 @@
                              term="critical" />
             </tr>
           </thead>
-          <tbody>
+          <tbody class="divide-y divide-gray-100">
             <!-- Odd row -->
             @foreach ($countries as $country)
 
