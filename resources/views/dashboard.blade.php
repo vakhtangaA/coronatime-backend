@@ -1,66 +1,36 @@
 @component('layout')
   @component('logoLayout', ['showNavbar' => true])
-    <div class="py-4 md:px-12 flex flex-col items-center">
-      <div class="flex justify-between flex-col items-center width90">
+    <div x-data="{component: 'worldwide' }"
+         class="flex flex-col items-center py-4 md:px-12">
+      <div class="flex flex-col items-center justify-between width90">
         <div class="self-start w-full">
-          <h1 class="text-xl lg:text-2xl lg:mt-8 leading-6 font-black">
-            @if (request()->get('show') === 'by-country')
-              Statistics By Country
-            @else
-              Worldwide Statistics
-            @endif
+          <h1 class="text-xl font-black leading-6 lg:text-2xl lg:mt-8"
+              x-text="component === 'worldwide' ? ' Worldwide Statistics' : 'Statistics By Country'">
           </h1>
-          <nav class="mt-6 lg:my-12  hrLine w-full {{ request()->get('show') !== 'by-country' ? 'my-4' : '' }}">
-            <ul class="flex w-48 justify-between">
-              <li class="pb-4 {{ request()->get('show') !== 'by-country' ? 'font-bold border-b-4 border-gray-800' : '' }}">
-                <a href="{{ request()->fullUrlWithQuery(['show' => 'worldwide']) }}">
-                  Worldwide
-                </a>
+          <nav class="w-full mt-6 lg:my-12 hrLine"
+               :class="component === 'worldwide' ? 'my-4' : ''">
+            <ul class="flex justify-between w-48">
+              <li @click="component = 'worldwide'"
+                  class="pb-4 cursor-pointer"
+                  :class="component === 'worldwide' ? 'font-bold border-b-4 border-gray-800' : ''">
+                Worldwide
               </li>
-              <li
-                  class="pb-4  {{ request()->get('show') === 'by-country' ? 'font-bold  border-b-4 border-gray-800' : '' }}">
-                <a href="{{ request()->fullUrlWithQuery(['show' => 'by-country']) }}">
-                  By country
-                </a>
+              <li @click="component = 'byCountry'"
+                  class="pb-4 cursor-pointer"
+                  :class="
+                  component==='byCountry'
+                  ? 'font-bold border-b-4 border-gray-800'
+                  : ''">
+                By country
               </li>
             </ul>
           </nav>
         </div>
-        @if (request()->get('show') === 'by-country')
-          <div class="w-screen md:width90">
-            @livewire('components.by-country')
-          </div>
-        @else
-          <div class="md:flex w-full justify-between">
-            <div class="relative flex  flex-col justify-center items-center">
-              <img class="px-0 w-full md:hidden"
-                   src="{{ asset('images/caseCharts.png') }}" />
-              <img class="px-0 w-full hidden md:block"
-                   src="{{ asset('images/newCasesDesktop.png') }}" />
-              <h3 class="absolute bottom-20 font-semibold ml-2">New cases</h3>
-              <h3 class="absolute bottom-10 text-3xl font-black text-blue-500">4314 31</h3>
-            </div>
-            <div class="flex justify-around"
-                 id="imageParent">
-              <div class="relative flex  flex-col justify-center items-center w-full md:w-auto">
-                <img class="px-0 w-full md:hidden"
-                     src="{{ asset('images/recoveredChart.png') }}" />
-                <img class="px-0 w-full hidden md:block"
-                     src="{{ asset('images/recoveredDesktop.png') }}" />
-                <h3 class="absolute bottom-20 font-semibold ml-2">Recovered</h3>
-                <h3 class="absolute bottom-10 text-3xl font-black text-green-500">434 31</h3>
-              </div>
-              <div class="relative flex  flex-col justify-center items-center w-full md:w-auto">
-                <img class="px-0  w-full md:hidden"
-                     src="{{ asset('images/deathchart.png') }}" />
-                <img class="px-0  w-full hidden md:block"
-                     src="{{ asset('images/deathDesktop.png') }}" />
-                <h3 class="absolute bottom-20 font-semibold ml-2">Death</h3>
-                <h3 class="absolute bottom-10 text-3xl font-black text-yellow-500">44 31</h3>
-              </div>
-            </div>
-          </div>
-        @endif
+        <div class="w-screen md:width90"
+             x-show="component === 'byCountry'">
+          @livewire('components.by-country')
+        </div>
+        <x-worldwide />
       </div>
     </div>
   @endcomponent

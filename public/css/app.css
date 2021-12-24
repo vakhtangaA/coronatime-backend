@@ -548,6 +548,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-lg {
   max-width: 32rem;
 }
+.cursor-pointer {
+  cursor: pointer;
+}
 .flex-col {
   flex-direction: column;
 }
