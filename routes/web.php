@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Components\Login;
+use App\Http\Livewire\Components\Register;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\VerificationController;
 
@@ -18,8 +20,8 @@ use App\Http\Controllers\VerificationController;
 Route::view('/', 'dashboard')->name('dashboard');
 
 Route::middleware('guest')->group(function () {
-	Route::get('/register', [\App\Http\Livewire\Components\Register::class, '__invoke'])->name('register');
-	Route::get('/login', [\App\Http\Livewire\Components\Login::class, '__invoke'])->name('login');
+	Route::get('/register', [Register::class, '__invoke'])->name('register');
+	Route::get('/login', [Login::class, '__invoke'])->name('login');
 });
 
 Route::middleware('auth')->group(function () {
@@ -30,7 +32,7 @@ Route::prefix('/email/verify')->group(function () {
 	Route::view(
 		'/',
 		'auth.verify-email'
-	)->middleware('auth')->name('verification.notice');
+	)->name('verification.notice');
 
 	Route::get('/{id}/{hash}', [VerificationController::class, 'index'])->middleware(['auth', 'signed'])->name('verification.verify');
 });

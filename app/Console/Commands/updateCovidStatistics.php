@@ -32,7 +32,7 @@ class updateCovidStatistics extends Command
 		parent::__construct();
 	}
 
-	protected function fetchCovidInfo()
+	public static function fetchCovidInfo(): array
 	{
 		$response = Http::get('https://devtest.ge/countries');
 
@@ -53,41 +53,52 @@ class updateCovidStatistics extends Command
 				])->collect();
 
 				// if api doesn't respond with country info,
-				// code tries 10 times to retrieve info, on each iteration, sleep time is increased
+				// code tries 5 times to retrieve info, on each iteration, sleep time is increased
 				if (!$countryInfo->has('confirmed'))
 				{
 					sleep($counter * 2);
 					$counter++;
 
-					if ($counter === 11)
+					if ($counter === 2)
 					{
 						$counter = 0;
 						break;
 					}
 				}
-				sleep(1);
+				// sleep(1);
 			}
 			while (!$countryInfo->has('confirmed'));
+
+			$countryInfo = Http::post('https://devtest.ge/get-country-statistics', [
+				'code' => $country['code'],
+			])->collect();
 
 			$countryNames = [
 				'en' => $country['name']['en'],
 				'ka' => $country['name']['ka'],
 			];
 
-			array_push($AllCountryInfo, [
-				'name'        => $countryNames,
-				'countryCode' => $countryInfo['code'],
-				'confirmed'   => $countryInfo['confirmed'],
-				'recovered'   => $countryInfo['recovered'],
-				'critical'    => $countryInfo['critical'],
-				'deaths'      => $countryInfo['deaths'],
-			]);
+			try
+			{
+				array_push($AllCountryInfo, [
+					'name'        => $countryNames,
+					'countryCode' => $countryInfo['code'],
+					'confirmed'   => $countryInfo['confirmed'],
+					'recovered'   => $countryInfo['recovered'],
+					'critical'    => $countryInfo['critical'],
+					'deaths'      => $countryInfo['deaths'],
+				]);
+			}
+			catch (\Throwable $th)
+			{
+				//throw $th;
+			}
 		}
 
 		return $AllCountryInfo;
 	}
 
-	protected function updateDatabase()
+	protected function updateDatabase(): void
 	{
 		$countries = $this->fetchCovidInfo();
 
@@ -125,7 +136,7 @@ class updateCovidStatistics extends Command
 	 *
 	 * @return int
 	 */
-	public function handle()
+	public function handle(): void
 	{
 		$this->updateDatabase();
 	}

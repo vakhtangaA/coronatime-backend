@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.8",
         "phpmailer/phpmailer": "^6.5",
+        "phpunit/php-code-coverage": "^9.2",
         "spatie/laravel-schedule-monitor": "^2.4",
         "spatie/laravel-translatable": "^5.0"
     },
@@ -27,7 +28,8 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
-        "phpunit/phpunit": "^9.5.10"
+        "phpunit/phpunit": "^9.5.10",
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {
         "psr-4": {
