@@ -27,9 +27,20 @@
             ./app/Exceptions/Handler.php
            </file>
            <file>
-            ./app/Exceptions/Handler
+            ./app/Exceptions/Handler.php
            </file>
-
+           <file>
+           ./app/Http/Middleware/Authenticate.php
+           </file>
+           <file>
+           ./app/Http/Middleware/RedirectIfAuthenticated.php
+           </file>
+            <file>
+           ./app/Http/Middleware/TrustHosts.php
+           </file>
+           <file>
+           ./app/Providers/BroadcastServiceProvider.php
+           </file>
         </exclude>
     </coverage>
     <php>
