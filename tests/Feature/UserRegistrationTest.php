@@ -20,6 +20,17 @@ class UserRegistrationTest extends TestCase
 		$response->assertSee('Welcome to Coronatime');
 	}
 
+	public function test_authorized_user_can_not_see_register_page()
+	{
+		$user = User::factory()->create();
+		$this->actingAs($user);
+
+		$response = $this->get(route('register'));
+
+		$response->assertDontSee('Welcome to Coronatime');
+		$response->assertRedirect('/');
+	}
+
 	public function test_user_registration_is_possible_when_properties_is_set_correctly()
 	{
 		Livewire::test(Register::class)

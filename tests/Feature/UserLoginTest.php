@@ -14,10 +14,21 @@ class UserLoginTest extends TestCase
 
 	public function test_register_page_is_rendered()
 	{
-		$response = $this->get('/login');
+		$response = $this->get(route('login'));
 
-		$response->assertStatus(200);
+		$response->assertSuccessful();
 		$response->assertSee('Welcome back');
+	}
+
+	public function test_authorized_user_can_not_see_login_page()
+	{
+		$user = User::factory()->create();
+		$this->actingAs($user);
+
+		$response = $this->get(route('login'));
+
+		$response->assertDontSee('Welcome back');
+		$response->assertRedirect('/');
 	}
 
 	public function test_user_login_is_possible_when_credentials_is_set_correctly()
@@ -32,6 +43,7 @@ class UserLoginTest extends TestCase
 			->call('submit');
 
 		$this->assertAuthenticated();
+		$this->assertAuthenticatedAs($user);
 	}
 
 	public function test_user_login_is_not_possible_when_credentials_is_not_set_correctly()
@@ -45,7 +57,5 @@ class UserLoginTest extends TestCase
 			->set('password', 'passwordaa')
 			->call('submit')
 			->assertRedirect(route('login'));
-
-		// $this->assertAuthenticated();
 	}
 }
