@@ -3,9 +3,9 @@
 namespace App\Http\Livewire\Components;
 
 use App\Models\User;
+use App\Notifications\VerificationMail;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
-use Illuminate\Auth\Events\Registered;
 
 class Register extends Component
 {
@@ -22,7 +22,7 @@ class Register extends Component
 		return [
 			'name'      => ['required', 'min:3', 'max:255', Rule::unique('users', 'name')],
 			'email'     => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
-			'password'  => ['required', 'min:3', 'max:255'],
+			'password'  => ['required', 'min:3', 'max:255', 'confirmed'],
 		];
 	}
 
@@ -46,8 +46,7 @@ class Register extends Component
 
 		$user = User::create($validatedData);
 
-		// auth()->login($user);
-		event(new Registered($user));
+		$user->notify(new VerificationMail($user));
 
 		session()->flash('success', 'Your account has been created.');
 
