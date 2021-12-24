@@ -1,8 +1,9 @@
 @component('layout')
   @component('logoLayout', ['showNavbar' => true])
     <div x-data="{component: 'worldwide' }"
+         x-cloak
          class="flex flex-col items-center py-4 md:px-12">
-      <div class="flex flex-col items-center justify-between width90">
+      <div class="flex flex-col items-center justify-between width90 2xl:max-h-max-w-10xl">
         <div class="self-start w-full">
           <h1 class="text-xl font-black leading-6 lg:text-2xl lg:mt-8"
               x-text="component === 'worldwide' ? ' Worldwide Statistics' : 'Statistics By Country'">
@@ -26,11 +27,14 @@
             </ul>
           </nav>
         </div>
-        <div class="w-screen md:width90"
+        <div class="w-full md:width90"
              x-show="component === 'byCountry'">
           @livewire('components.by-country')
         </div>
-        <x-worldwide />
+        <div x-show="component === 'worldwide'"
+             class="w-full">
+          <x-worldwide />
+        </div>
       </div>
     </div>
   @endcomponent

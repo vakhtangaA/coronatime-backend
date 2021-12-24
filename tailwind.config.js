@@ -8,9 +8,16 @@ module.exports = {
         extend: {
             colors: {
                 btnColor: "#0FBA68",
+                bgNewCases: "#F3EBFF",
+                bgRecoveredCases: "#EBFCF3",
+                bgDeathCases: "#FEFDEC",
             },
             backgroundImage: {
                 caseChart: "url(/images/caseCharts.png)",
+            },
+            spacing: {
+                minHeightChartImg: "8rem",
+                "max-w-10xl": "1500px",
             },
         },
     },

@@ -1,30 +1,20 @@
-<div class="justify-between w-full md:flex"
-     x-show="component === 'worldwide'">
-  <div class="relative flex flex-col items-center justify-center">
-    <img class="w-full px-0 md:hidden"
-         src="{{ asset('images/caseCharts.png') }}" />
-    <img class="hidden w-full px-0 md:block"
-         src="{{ asset('images/newCasesDesktop.png') }}" />
-    <h3 class="absolute ml-2 font-semibold bottom-20">New cases</h3>
-    <h3 class="absolute text-3xl font-black text-blue-500 bottom-10">4314 31</h3>
+<div class="grid w-full grid-cols-3 gap-4 2xl:gap-20">
+  <div
+       class="flex flex-col items-center justify-center flex-1 col-span-3 rounded-lg md:col-span-1 span py-14 bg-bgNewCases">
+    <img src="{{ asset('images/newCases.svg') }}" />
+    <h3 class="mt-4 font-semibold xl:text-xl">New cases</h3>
+    <h3 class="mt-4 text-3xl font-black text-blue-500 xl:text-4xl">4314 31</h3>
   </div>
-  <div class="flex justify-around"
-       id="imageParent">
-    <div class="relative flex flex-col items-center justify-center w-full md:w-auto">
-      <img class="w-full px-0 md:hidden"
-           src="{{ asset('images/recoveredChart.png') }}" />
-      <img class="hidden w-full px-0 md:block"
-           src="{{ asset('images/recoveredDesktop.png') }}" />
-      <h3 class="absolute ml-2 font-semibold bottom-20">Recovered</h3>
-      <h3 class="absolute text-3xl font-black text-green-500 bottom-10">434 31</h3>
+  <div class="grid grid-cols-2 col-span-3 gap-3 md:col-span-2 md:gap-4 2xl:gap-20">
+    <div class="flex flex-col items-center justify-center flex-1 col-span-1 rounded-lg py-14 bg-bgRecoveredCases">
+      <img src="{{ asset('images/recovered.svg') }}" />
+      <h3 class="mt-4 font-semibold xl:text-xl">Recovered</h3>
+      <h3 class="mt-4 text-3xl font-black text-green-500 xl:text-4xl">4314 31</h3>
     </div>
-    <div class="relative flex flex-col items-center justify-center w-full md:w-auto">
-      <img class="w-full px-0 md:hidden"
-           src="{{ asset('images/deathchart.png') }}" />
-      <img class="hidden w-full px-0 md:block"
-           src="{{ asset('images/deathDesktop.png') }}" />
-      <h3 class="absolute ml-2 font-semibold bottom-20">Death</h3>
-      <h3 class="absolute text-3xl font-black text-yellow-500 bottom-10">44 31</h3>
+    <div class="flex flex-col items-center justify-center flex-1 col-span-1 rounded-lg py-14 bg-bgDeathCases">
+      <img src="{{ asset('images/death.svg') }}" />
+      <h3 class="mt-4 font-semibold xl:text-xl">Deaths</h3>
+      <h3 class="mt-4 text-3xl font-black text-yellow-500 xl:text-4xl">4314 31</h3>
     </div>
   </div>
 </div>
