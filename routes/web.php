@@ -17,22 +17,26 @@ use App\Http\Controllers\VerificationController;
 |
 */
 
-Route::view('/', 'dashboard')->name('dashboard');
+Route::redirect('/', 'en');
 
-Route::middleware('guest')->group(function () {
-	Route::get('/register', [Register::class, '__invoke'])->name('register');
-	Route::get('/login', [Login::class, '__invoke'])->name('login');
-});
+Route::prefix('{language}')->group(function () {
+	Route::view('/', 'dashboard')->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-	Route::post('logout', [SessionController::class, 'destroy'])->name('logout');
-});
+	Route::middleware('guest')->group(function () {
+		Route::get('/register', [Register::class, '__invoke'])->name('register');
+		Route::get('/login', [Login::class, '__invoke'])->name('login');
+	});
 
-Route::prefix('/email/verify')->group(function () {
-	Route::view(
-		'/',
-		'auth.verify-email'
-	)->name('verification.notice');
+	Route::middleware('auth')->group(function () {
+		Route::post('logout', [SessionController::class, 'destroy'])->name('logout');
+	});
 
-	Route::get('/{id}/{hash}', [VerificationController::class, 'index'])->middleware(['auth', 'signed'])->name('verification.verify');
+	Route::prefix('/email/verify')->group(function () {
+		Route::view(
+			'/',
+			'auth.verify-email'
+		)->name('verification.notice');
+
+		Route::get('/{id}/{hash}', [VerificationController::class, 'index'])->middleware(['auth', 'signed'])->name('verification.verify');
+	});
 });

@@ -3,7 +3,7 @@
     <input wire:model='search'
            type="search"
            class="relative px-12 py-4 border-gray-300 rounded-md md:border md:py-3 focus:outline-none w-60 "
-           placeholder="Search by country" />
+           placeholder="{{ __('Search by country') }}" />
     <x-svgs.searchSvg />
   </div>
   <div class="overflow-x-auto">

@@ -5,7 +5,7 @@
     <div class="flex flex-col items-center m-auto">
       <img src="{{ asset('images/icons8-checked 1.png') }}" />
       <p>
-        We have sent you a confirmation email
+        {{ __('We have sent you a confirmation email') }}
       </p>
     </div>
   </div>

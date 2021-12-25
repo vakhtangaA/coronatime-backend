@@ -20,7 +20,7 @@ class Register extends Component
 	public function rules()
 	{
 		return [
-			'name'      => ['required', 'min:3', 'max:255', Rule::unique('users', 'name')],
+			'name'      => ['required', 'min:3', 'max:255', Rule::unique('users', 'name'), Rule::unique('users', 'name')],
 			'email'     => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
 			'password'  => ['required', 'min:3', 'max:255', 'confirmed'],
 		];
@@ -36,7 +36,14 @@ class Register extends Component
 		// so here i manually add that error and now user can see password_confirmation error during typing
 		if ($propertyName === 'password_confirmation' && $this->password !== $this->password_confirmation)
 		{
-			$this->addError('password_confirmation', 'The password confirmation does not match.');
+			if (app()->getLocale() === 'ka')
+			{
+				$this->addError('password_confirmation', 'პაროლები არ ემთხვევა ერთმანეთს');
+			}
+			else
+			{
+				$this->addError('password_confirmation', 'The password confirmation does not match.');
+			}
 		}
 	}
 
@@ -50,7 +57,7 @@ class Register extends Component
 
 		session()->flash('success', 'Your account has been created.');
 
-		return redirect()->route('verification.notice');
+		return redirect()->route('verification.notice', app()->getLocale());
 	}
 
 	public function render()
