@@ -9,75 +9,86 @@ class ByCountry extends Component
 {
 	public $search;
 
+	public $countries;
+
+	public $filter = 'location-asc';
+
+	protected $listeners = ['filterUpdated'];
+
+	public function mount()
+	{
+		$this->countries = Country::all();
+	}
+
 	public function render()
 	{
-		$countries = Country::all();
+		$CI = $this;
 
-		$countries = Country::where('name', 'like', '%' . $this->search . '%')
+		$this->countries = Country::where('name', 'like', '%' . $this->search . '%')
 		->get()
 		->when(
-			request()->get('sort') === 'location-desc',
-			function () use ($countries) {
-				return $countries->sortByDesc('name');
+			$this->filter === 'location-desc',
+			function () use ($CI) {
+				return $CI->countries->sortByDesc('name');
 			}
 		)
 		->when(
-			request()->get('sort') === 'location-asc',
-			function () use ($countries) {
-				return $countries->sortBy('name');
+			$this->filter === 'location-asc',
+			function () use ($CI) {
+				return $CI->countries->sortBy('name');
 			}
 		)
 		->when(
-			request()->get('sort') === 'cases-desc',
-			function () use ($countries) {
-				return $countries->sortByDesc('confirmed');
+			$this->filter === 'cases-desc',
+			function () use ($CI) {
+				return $CI->countries->sortByDesc('confirmed');
 			}
 		)
 		->when(
-			request()->get('sort') === 'cases-asc',
-			function () use ($countries) {
-				return $countries->sortBy('confirmed');
+			$this->filter === 'cases-asc',
+			function () use ($CI) {
+				return $CI->countries->sortBy('confirmed');
 			}
 		)
 		->when(
-			request()->get('sort') === 'deaths-desc',
-			function () use ($countries) {
-				return $countries->sortByDesc('deaths');
+			$this->filter === 'deaths-desc',
+			function () use ($CI) {
+				return $CI->countries->sortByDesc('deaths');
 			}
 		)
 		->when(
-			request()->get('sort') === 'deaths-asc',
-			function () use ($countries) {
-				return $countries->sortBy('deaths');
+			$this->filter === 'deaths-asc',
+			function () use ($CI) {
+				return $CI->countries->sortBy('deaths');
 			}
 		)
 		->when(
-			request()->get('sort') === 'recovered-desc',
-			function () use ($countries) {
-				return $countries->sortByDesc('recovered');
+			$this->filter === 'recovered-desc',
+			function () use ($CI) {
+				return $CI->countries->sortByDesc('recovered');
 			}
 		)
 		->when(
-			request()->get('sort') === 'recovered-asc',
-			function () use ($countries) {
-				return $countries->sortBy('recovered');
+			$this->filter === 'recovered-asc',
+			function () use ($CI) {
+				return $CI->countries->sortBy('recovered');
 			}
 		)
 		->when(
-			request()->get('sort') === 'critical-desc',
-			function () use ($countries) {
-				return $countries->sortByDesc('critical');
+			$this->filter === 'critical-desc',
+			function () use ($CI) {
+				return $CI->countries->sortByDesc('critical');
 			}
 		)
 		->when(
-			request()->get('sort') === 'critical-asc',
-			function () use ($countries) {
-				return $countries->sortBy('critical');
+			$this->filter === 'critical-asc',
+			function () use ($CI) {
+				return $CI->countries->sortBy('critical');
 			}
 		);
 
 		return view('livewire.components.by-country', [
-			'countries' => $countries,
+			'countries' => $this->countries,
 		])->layout('layout');
 	}
 }
