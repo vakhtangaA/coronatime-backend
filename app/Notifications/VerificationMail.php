@@ -2,10 +2,13 @@
 
 namespace App\Notifications;
 
-use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Notifications\Notification;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class VerificationMail extends VerifyEmail
@@ -33,18 +36,38 @@ class VerificationMail extends VerifyEmail
 		return ['mail'];
 	}
 
+	protected function buildMailMessage($url)
+	{
+		return (new MailMessage)
+			->level('success')
+			->subject(Lang::get('Verify Email Address'))
+			->view('notifications.email')
+			->action(Lang::get('Verify Email'), $url);
+	}
+
 	/**
-	 * Get the mail representation of the notification.
+	 * Get the verification URL for the given notifiable.
 	 *
 	 * @param mixed $notifiable
 	 *
-	 * @return \Illuminate\Notifications\Messages\MailMessage
+	 * @return string
 	 */
-	public function toMail($notifiable)
+	public function verificationUrl($notifiable)
 	{
-		return (new MailMessage)
-					->level('success')
-					->subject(Lang::get('Verify Email Address'))
-					->view('notifications.email');
+		if (static::$createUrlCallback)
+		{
+			return call_user_func(static::$createUrlCallback, $notifiable);
+		}
+
+		return URL::temporarySignedRoute(
+			'verification.verify',
+			Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
+			[
+				'id'          => $notifiable->getKey(),
+				'hash'        => sha1($notifiable->getEmailForVerification()),
+				'language'    => app()->getLocale(),
+				'redirect_to' => route('verified', app()->getLocale()),
+			]
+		);
 	}
 }
