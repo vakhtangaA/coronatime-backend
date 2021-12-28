@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class VerificationController extends Controller
@@ -10,8 +12,20 @@ class VerificationController extends Controller
 	{
 		$request->fulfill();
 
-		auth()->logout();
+		return redirect()->route('verified', app()->getLocale());
+	}
 
-		return redirect()->route('login')->with('success', 'Your account is verified, please sign in');
+	public function resend(Request $request)
+	{
+		$request->user()->sendEmailVerificationNotification();
+
+		return back()->with('success', 'Verification link sent!');
+	}
+
+	public function afterVerification()
+	{
+		Auth::logout();
+
+		return redirect()->route('login', app()->getLocale());
 	}
 }
