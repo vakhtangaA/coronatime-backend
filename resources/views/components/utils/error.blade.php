@@ -1,6 +1,6 @@
 <div class="absolute">
   <x-svgs.errorSvg />
-  <span class="mb-4 text-sm font-medium text-red-500">
+  <span class="text-xs font-medium text-red-500 md:text-sm ">
     {{ $message }}
   </span>
 </div>
