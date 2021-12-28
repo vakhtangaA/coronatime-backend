@@ -39,7 +39,7 @@
         @auth
           <span
                 class="hidden pr-4 ml-10 mr-2 font-bold border-r border-gray-300 md:inline-block">{{ auth()->user()->name }}</span>
-          <form action='{{ route('logout') }}'
+          <form action='{{ route('logout', app()->getLocale()) }}'
                 method="POST"
                 class="hidden md:block">
             @csrf
@@ -68,7 +68,7 @@
             class="absolute z-10 p-3 bg-white border border-gray-100 rounded-lg shadow-lg right-3 top-16 h-28 w-28">
           @auth
             <li>
-              <form action='{{ route('logout') }}'
+              <form action='{{ route('logout', app()->getLocale()) }}'
                     method="POST"
                     class="md:block">
                 @csrf

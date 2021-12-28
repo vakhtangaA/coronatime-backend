@@ -11,7 +11,8 @@
       <p class="mb-4 text-gray-400">
         {{ __('Please enter required info to sign up') }}
       </p>
-      <form wire:submit.prevent="submit">
+      <form wire:submit.prevent="submit"
+            method="POST">
         @csrf
 
         <div class="mb-10">
@@ -45,7 +46,8 @@
             </label>
           </div>
 
-          <a class="font-semibold text-blue-600">
+          <a class="font-semibold text-blue-600"
+             href="{{ route('password.email', app()->getLocale()) }}">
             {{ __('Forgot password?') }}
           </a>
         </div>

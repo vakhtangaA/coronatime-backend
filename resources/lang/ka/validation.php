@@ -3,7 +3,7 @@
 return [
 	'unique'           => ':attribute უკვე არსებობს',
 	'required'         => 'ველის შევსება სავალდებულოა',
-	'email'            => ':attribute უნდა იყოსვალიდური',
+	'email'            => ':attribute უნდა იყოს ვალიდური',
 	'confirmed'        => ':attribute არ ემთხვევა',
 	'min'              => [
 		'numeric' => 'ველი უნდა შედგებოდეს მინიმუმ :min  სიმბოლოსგან',

@@ -8,6 +8,6 @@ class SessionController extends Controller
 	{
 		auth()->logout();
 
-		return redirect()->route('dashboard')->with('success', 'Goodbye');
+		return redirect()->route('dashboard', app()->getLocale())->with('success', 'Goodbye');
 	}
 }

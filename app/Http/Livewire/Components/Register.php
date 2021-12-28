@@ -53,6 +53,8 @@ class Register extends Component
 
 		$user = User::create($validatedData);
 
+		auth()->login($user);
+
 		$user->notify(new VerificationMail($user));
 
 		session()->flash('success', 'Your account has been created.');
