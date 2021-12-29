@@ -427,9 +427,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-6 {
   right: 1.5rem;
 }
-.top-3 {
-  top: 0.75rem;
-}
 .z-10 {
   z-index: 10;
 }
@@ -659,6 +656,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-b {
   border-bottom-width: 1px;
 }
+.border-t-4 {
+  border-top-width: 4px;
+}
 .border-none {
   border-style: none;
 }
@@ -682,13 +682,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1;
   border-color: rgb(248 113 113 / var(--tw-border-opacity));
 }
-.border-indigo-400 {
-  --tw-border-opacity: 1;
-  border-color: rgb(129 140 248 / var(--tw-border-opacity));
-}
 .border-green-400 {
   --tw-border-opacity: 1;
   border-color: rgb(74 222 128 / var(--tw-border-opacity));
+}
+.border-tableHeader {
+  --tw-border-opacity: 1;
+  border-color: rgb(246 246 247 / var(--tw-border-opacity));
 }
 .bg-green-400 {
   --tw-bg-opacity: 1;
@@ -725,10 +725,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-.bg-indigo-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(129 140 248 / var(--tw-bg-opacity));
 }
 .p-3 {
   padding: 0.75rem;

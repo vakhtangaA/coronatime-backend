@@ -11,6 +11,7 @@ module.exports = {
                 bgNewCases: "#F3EBFF",
                 bgRecoveredCases: "#EBFCF3",
                 bgDeathCases: "#FEFDEC",
+                tableHeader: "#f6f6f7",
             },
             backgroundImage: {
                 caseChart: "url(/images/caseCharts.png)",
