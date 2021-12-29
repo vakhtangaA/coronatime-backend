@@ -8,8 +8,9 @@ body {
 
 .x-scroller {
     overflow-x: scroll;
-    overflow-y: hidden;
-    /* height: 500px; */
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    max-height: 534px;
     white-space: nowrap;
     scroll-behavior: smooth;
 }
@@ -35,5 +36,5 @@ body {
 }
 
 html {
-    overflow-y: scroll;
+    scroll-behavior: smooth;
 }

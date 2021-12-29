@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     class="h-6 w-6 absolute top-4 md:top-3 left-4"
+     class="absolute w-6 h-6 top-4 md:top-3 left-4"
      fill="none"
      viewBox="0 0 24 24"
      stroke="#232423">

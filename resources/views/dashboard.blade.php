@@ -3,12 +3,9 @@
     <div x-data="{component: 'worldwide' }"
          x-cloak
          class="flex flex-col items-center py-4 md:px-12">
-      <div class="flex flex-col items-center justify-between width90 2xl:max-h-max-w-10xl">
-        <div class="self-start w-full">
-
-          {{-- <h1 class="text-xl font-black leading-6 lg:text-2xl lg:mt-8"
-              x-text="component === 'worldwide' ? {{ __('Worldwide Statistics') }} : 'Statistics By Country'">
-          </h1> --}}
+      <div class="flex flex-col items-center justify-between 2xl:max-h-max-w-10xl"
+           :class="component === 'worldwide' ? 'width90' : 'w-full lg:width90'">
+        <div class="self-center width90">
           <h1 class="text-xl font-black leading-6 lg:text-2xl lg:mt-8"
               x-show="component === 'worldwide'"
               style="display: none">
@@ -38,7 +35,7 @@
             </ul>
           </nav>
         </div>
-        <div class="w-full md:width90"
+        <div class="self-center w-full sm:width90"
              style="display: none"
              x-show="component === 'byCountry'">
           @livewire('components.by-country')

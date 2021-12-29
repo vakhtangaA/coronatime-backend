@@ -22,6 +22,7 @@
 
           <div x-show="show"
                @click.away="show = false"
+               style="display: none"
                class="absolute p-2 px-4 bg-white border border-gray-200 rounded-md shadow-xl top-8">
             <a class="inline-block text-xs font-semibold leading-5 text-gray-600 hover:underline"
                href="{{ route(Route::currentRouteName(), 'en') }}">

@@ -1,8 +1,8 @@
 <div class="flex flex-col">
-  <div class="relative w-fit md:my-12">
+  <div class="relative w-fit md:my-10 lg:mt-0 lg:mb-10">
     <input wire:model='search'
            type="search"
-           class="relative px-12 py-4 border-gray-300 rounded-md md:border md:py-3 focus:outline-none w-60 "
+           class="relative w-64 px-4 py-4 font-semibold text-center border-gray-300 rounded-md md:border md:py-3 focus:outline-none"
            placeholder="{{ __('Search by country') }}" />
     <x-svgs.searchSvg />
   </div>
