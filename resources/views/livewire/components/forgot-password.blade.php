@@ -17,7 +17,8 @@
                        label="Email"
                        placeholder="Enter your email"
                        identifier="email"
-                       type="email" />
+                       type="email"
+                       :text="$email" />
         @error('email')
           <x-utils.error :message="$message" />
         @enderror

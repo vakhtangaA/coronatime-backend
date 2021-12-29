@@ -19,7 +19,8 @@
           <x-utils.input label="Username"
                          placeholder="Enter unique username"
                          identifier="name"
-                         type="text" />
+                         type="text"
+                         :text="$name" />
           @error('name')
             <x-utils.error :message="$message" />
           @enderror
@@ -28,7 +29,8 @@
           <x-utils.input label="Password"
                          placeholder="Fill in password"
                          identifier="password"
-                         type="password" />
+                         type="password"
+                         :text="$password" />
           @error('password')
             <x-utils.error :message="$message" />
           @enderror

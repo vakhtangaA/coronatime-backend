@@ -18,7 +18,8 @@
           <x-utils.input label="Username"
                          placeholder="Enter unique username"
                          identifier="name"
-                         type="text" />
+                         type="text"
+                         :text="$name" />
           @error('name')
             <x-utils.error :message="$message"
                            identifier="name" />
@@ -28,7 +29,8 @@
           <x-utils.input label="Email"
                          placeholder="Enter your email"
                          identifier="email"
-                         type="email" />
+                         type="email"
+                         :text="$email" />
           @error('email')
             <x-utils.error :message="$message" />
           @enderror
@@ -37,7 +39,8 @@
           <x-utils.input label="Password"
                          placeholder="Fill in password"
                          identifier="password"
-                         type="password" />
+                         type="password"
+                         :text="$password" />
           @error('password')
             {{-- this if statement does,
                that password confirmation message is shown under repeat password input,
@@ -51,7 +54,8 @@
           <x-utils.input label="Repeat Password"
                          placeholder="Repeat Password"
                          identifier="password_confirmation"
-                         type="password" />
+                         type="password"
+                         :text="$password_confirmation" />
           @error('password_confirmation')
             <x-utils.error :message="$message" />
           @enderror
