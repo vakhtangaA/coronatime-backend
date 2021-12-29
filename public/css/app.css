@@ -444,13 +444,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 .mt-6 {
   margin-top: 1.5rem;
@@ -463,9 +463,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .ml-10 {
   margin-left: 2.5rem;
-}
-.mr-2 {
-  margin-right: 0.5rem;
 }
 .mr-4 {
   margin-right: 1rem;
@@ -499,9 +496,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mr-3 {
   margin-right: 0.75rem;
-}
-.mr-10 {
-  margin-right: 2.5rem;
 }
 .block {
   display: block;
@@ -750,17 +744,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-.py-16 {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
 .py-32 {
   padding-top: 8rem;
   padding-bottom: 8rem;
+}
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 .pb-4 {
   padding-bottom: 1rem;
@@ -871,9 +861,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .opacity-50 {
   opacity: 0.5;
-}
-.opacity-90 {
-  opacity: 0.9;
 }
 .opacity-70 {
   opacity: 0.7;
@@ -1008,10 +995,6 @@ th.sticky-header {
 
   .md\:block {
     display: block;
-  }
-
-  .md\:inline-block {
-    display: inline-block;
   }
 
   .md\:flex {

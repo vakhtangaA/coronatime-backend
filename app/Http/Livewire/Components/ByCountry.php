@@ -13,8 +13,6 @@ class ByCountry extends Component
 
 	public $filter = 'name-asc';
 
-	protected $queryString = ['filter', 'search'];
-
 	public function mount()
 	{
 		$this->countries = Country::all();
