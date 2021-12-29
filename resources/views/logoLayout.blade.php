@@ -38,8 +38,12 @@
              @click="open = ! open"
              src="{{ asset('images/burger.png') }}" />
         @auth
-          <span
-                class="hidden pr-4 ml-10 mr-2 font-bold border-r border-gray-300 md:inline-block">{{ auth()->user()->name }}</span>
+          <div class="items-center hidden ml-10 md:flex">
+            <x-svgs.account />
+            <span class="pr-4 mx-2 font-bold border-r border-gray-300">{{ auth()->user()->name }}</span>
+          </div>
+
+
           <form action='{{ route('logout', app()->getLocale()) }}'
                 method="POST"
                 class="hidden md:block">

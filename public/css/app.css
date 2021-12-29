@@ -448,6 +448,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
 .mt-6 {
   margin-top: 1.5rem;
 }
@@ -495,6 +499,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mr-3 {
   margin-right: 0.75rem;
+}
+.mr-10 {
+  margin-right: 2.5rem;
 }
 .block {
   display: block;
@@ -716,6 +723,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-4 {
   padding: 1rem;
 }
+.p-8 {
+  padding: 2rem;
+}
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -743,6 +753,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+.py-32 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
 }
 .pb-4 {
   padding-bottom: 1rem;
@@ -774,6 +792,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 .font-black {
   font-weight: 900;
@@ -847,6 +869,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
 }
+.opacity-50 {
+  opacity: 0.5;
+}
+.opacity-90 {
+  opacity: 0.9;
+}
+.opacity-70 {
+  opacity: 0.7;
+}
 .shadow-xl {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
@@ -875,8 +906,8 @@ body {
 }
 
 .x-scroller {
-    overflow-x: scroll;
-    overflow-y: scroll;
+    overflow-x: auto;
+    overflow-y: auto;
     max-height: 534px;
     white-space: nowrap;
     scroll-behavior: smooth;
@@ -887,12 +918,6 @@ body {
 }
 
 /* put by-country page scrollbarx-x on top of countries list */
-.flipped,
-.flipped .content {
-    transform: rotateX(180deg);
-    -ms-transform: rotateX(180deg); /* IE 9 */
-    -webkit-transform: rotateX(180deg); /* Safari and Chrome */
-}
 
 .hrLine::after {
     content: "";
@@ -904,6 +929,16 @@ body {
 
 html {
     scroll-behavior: smooth;
+}
+
+th.sticky-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #f6f6f7;
+    /*To not have transparent background.
+  background-color: white;*/
 }
 
 .hover\:text-red-500:hover {

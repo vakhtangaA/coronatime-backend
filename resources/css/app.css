@@ -7,8 +7,8 @@ body {
 }
 
 .x-scroller {
-    overflow-x: scroll;
-    overflow-y: scroll;
+    overflow-x: auto;
+    overflow-y: auto;
     scroll-behavior: smooth;
     max-height: 534px;
     white-space: nowrap;
@@ -20,12 +20,6 @@ body {
 }
 
 /* put by-country page scrollbarx-x on top of countries list */
-.flipped,
-.flipped .content {
-    transform: rotateX(180deg);
-    -ms-transform: rotateX(180deg); /* IE 9 */
-    -webkit-transform: rotateX(180deg); /* Safari and Chrome */
-}
 
 .hrLine::after {
     content: "";
@@ -37,4 +31,13 @@ body {
 
 html {
     scroll-behavior: smooth;
+}
+
+th.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #f6f6f7;
+    /*To not have transparent background.
+  background-color: white;*/
 }
