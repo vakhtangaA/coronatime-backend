@@ -1,6 +1,6 @@
 @component('layout')
   @component('logoLayout', ['showNavbar' => true])
-    <div x-data="{component: 'worldwide' }"
+    <div x-data="{component: $persist('worldwide')}"
          x-cloak
          class="flex flex-col items-center py-4 md:px-12">
       <div class="flex flex-col items-center justify-between 2xl:max-h-max-w-10xl"
@@ -35,14 +35,14 @@
             </ul>
           </nav>
         </div>
-        <div class="self-center w-full sm:width90"
-             style="display: none"
-             x-show="component === 'byCountry'">
+        <div x-show="component === 'byCountry'"
+             class="self-center w-full sm:width90"
+             style="display: none">
           @livewire('components.by-country')
         </div>
         <div x-show="component === 'worldwide'"
              class="w-full">
-          <x-worldwide />
+          <x-worldwide :statistics="$statistics" />
         </div>
       </div>
     </div>
