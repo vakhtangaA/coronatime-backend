@@ -11,9 +11,9 @@ class ByCountry extends Component
 
 	public $countries;
 
-	public $filter = 'location-asc';
+	public $filter = 'name-asc';
 
-	protected $listeners = ['filterUpdated'];
+	protected $queryString = ['filter', 'search'];
 
 	public function mount()
 	{
@@ -22,70 +22,9 @@ class ByCountry extends Component
 
 	public function render()
 	{
-		$CI = $this;
+		[$filterTerm, $orderDirection] = explode('-', $this->filter);
 
-		$this->countries = Country::where('name', 'like', '%' . $this->search . '%')
-		->get()
-		->when(
-			$this->filter === 'location-desc',
-			function () use ($CI) {
-				return $CI->countries->sortByDesc('name');
-			}
-		)
-		->when(
-			$this->filter === 'location-asc',
-			function () use ($CI) {
-				return $CI->countries->sortBy('name');
-			}
-		)
-		->when(
-			$this->filter === 'cases-desc',
-			function () use ($CI) {
-				return $CI->countries->sortByDesc('confirmed');
-			}
-		)
-		->when(
-			$this->filter === 'cases-asc',
-			function () use ($CI) {
-				return $CI->countries->sortBy('confirmed');
-			}
-		)
-		->when(
-			$this->filter === 'deaths-desc',
-			function () use ($CI) {
-				return $CI->countries->sortByDesc('deaths');
-			}
-		)
-		->when(
-			$this->filter === 'deaths-asc',
-			function () use ($CI) {
-				return $CI->countries->sortBy('deaths');
-			}
-		)
-		->when(
-			$this->filter === 'recovered-desc',
-			function () use ($CI) {
-				return $CI->countries->sortByDesc('recovered');
-			}
-		)
-		->when(
-			$this->filter === 'recovered-asc',
-			function () use ($CI) {
-				return $CI->countries->sortBy('recovered');
-			}
-		)
-		->when(
-			$this->filter === 'critical-desc',
-			function () use ($CI) {
-				return $CI->countries->sortByDesc('critical');
-			}
-		)
-		->when(
-			$this->filter === 'critical-asc',
-			function () use ($CI) {
-				return $CI->countries->sortBy('critical');
-			}
-		);
+		$this->countries = Country::where('name', 'like', '%' . $this->search . '%')->orderBy($filterTerm, $orderDirection)->get();
 
 		return view('livewire.components.by-country', [
 			'countries' => $this->countries,

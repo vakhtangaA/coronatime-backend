@@ -6,21 +6,21 @@
            placeholder="{{ __('Search by country') }}" />
     <x-svgs.searchSvg />
   </div>
-  <div class="overflow-x-auto">
+  <div class="overflow-x-auto"
+       wire:loading.class.delay="opacity-50">
     <div class="inline-block py-2 m-auto align-middle">
-      <div
-           class="m-auto border-b border-gray-200 md:shadow lg:overflow-x-hidden sm:rounded-lg x-scroller flipped md:width90">
+      <div class="m-auto border-b border-gray-200 md:shadow lg:overflow-x-hidden sm:rounded-lg x-scroller md:width90">
         <table class="w-full border border-gray-100 divide-y divide-gray-200 shadow content">
           <thead class="bg-gray-100 h-14">
             <tr>
               <x-utils.tHead text="Location"
                              :filter="$filter"
-                             asc="location-asc"
-                             desc="location-desc" />
+                             asc="name-asc"
+                             desc="name-desc" />
               <x-utils.tHead text="New Cases"
                              :filter="$filter"
-                             asc="cases-asc"
-                             desc="cases-desc" />
+                             asc="confirmed-asc"
+                             desc="confirmed-desc" />
               <x-utils.tHead text="Deaths"
                              :filter="$filter"
                              asc="deaths-asc"
@@ -36,7 +36,7 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
-            @foreach ($countries as $country)
+            @forelse ($countries as $country)
               <tr class="bg-white"
                   wire:key='{{ $country->countryCode }}'>
                 <x-utils.tData text="{{ $country->name }}" />
@@ -45,7 +45,17 @@
                 <x-utils.tData text="{{ $country->recovered }}" />
                 <x-utils.tData text="{{ $country->critical }}" />
               </tr>
-            @endforeach
+            @empty
+              <tr class="bg-white">
+                <td colspan="5">
+                  <div class="flex items-center justify-center p-8 py-32">
+                    <p class="text-2xl font-bold opacity-70">
+                      No countries were found...
+                    </p>
+                  </div>
+                </td>
+              </tr>
+            @endforelse
           </tbody>
         </table>
       </div>
