@@ -66,7 +66,7 @@ class VerificationMail extends VerifyEmail
 				'id'          => $notifiable->getKey(),
 				'hash'        => sha1($notifiable->getEmailForVerification()),
 				'language'    => app()->getLocale(),
-				'redirect_to' => route('verified', app()->getLocale()),
+				'redirect_to' => route('account.verified.notice', app()->getLocale()),
 			]
 		);
 	}

@@ -12,7 +12,9 @@ class VerificationController extends Controller
 	{
 		$request->fulfill();
 
-		return redirect()->route('verified', app()->getLocale());
+		Auth::logout();
+
+		return redirect()->route('account.verified.notice', app()->getLocale());
 	}
 
 	public function resend(Request $request)
@@ -24,8 +26,6 @@ class VerificationController extends Controller
 
 	public function afterVerification()
 	{
-		Auth::logout();
-
 		return redirect()->route('login', app()->getLocale());
 	}
 }
