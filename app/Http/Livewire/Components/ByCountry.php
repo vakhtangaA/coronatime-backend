@@ -22,7 +22,10 @@ class ByCountry extends Component
 	{
 		[$filterTerm, $orderDirection] = explode('-', $this->filter);
 
-		$this->countries = Country::where('name', 'like', '%' . $this->search . '%')->orderBy($filterTerm, $orderDirection)->get();
+		$this->countries = Country::where('name', 'like', '%' . $this->search . '%')
+			->orWhere('name->ka', 'like', '%' . $this->search . '%')
+			->orderBy($filterTerm, $orderDirection)
+			->get();
 
 		return view('livewire.components.by-country', [
 			'countries' => $this->countries,
