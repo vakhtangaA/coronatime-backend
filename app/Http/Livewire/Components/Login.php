@@ -11,6 +11,8 @@ class Login extends Component
 
 	public $password;
 
+	public $remember;
+
 	public function rules()
 	{
 		return [
@@ -28,7 +30,7 @@ class Login extends Component
 	{
 		$validatedData = $this->validate();
 
-		if (Auth::attempt($validatedData))
+		if (Auth::attempt($validatedData, $this->remember))
 		{
 			// Authentication passed...
 			session()->flash('success', 'Your are now logged in');

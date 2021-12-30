@@ -13,6 +13,8 @@ class Register extends Component
 
 	public $email;
 
+	public $remember;
+
 	public $password;
 
 	public $password_confirmation;
@@ -53,7 +55,7 @@ class Register extends Component
 
 		$user = User::create($validatedData);
 
-		auth()->login($user);
+		auth()->login($user, $this->remember);
 
 		$user->notify(new VerificationMail($user));
 

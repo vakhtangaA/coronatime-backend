@@ -38,11 +38,12 @@
         <div class="flex items-center justify-between">
           <div class="flex items-center">
             <input type="checkbox"
-                   id="remember_device"
-                   name="remember_device"
-                   class="w-5 h-5 mr-3 border-none outline-none">
+                   id="remember"
+                   name="remember"
+                   class="w-5 h-5 mr-3 border-none outline-none"
+                   wire:model='remember'>
 
-            <label for="remember_device"
+            <label for="remember"
                    class="my-2 text-sm font-semibold">
               {{ __('Remember this device') }}
             </label>
