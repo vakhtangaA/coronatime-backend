@@ -7,19 +7,16 @@ body {
 }
 
 .x-scroller {
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
     max-height: 534px;
-    white-space: nowrap;
     scroll-behavior: smooth;
 }
 
 .width90 {
     width: 90vw;
 }
-
-/* put by-country page scrollbarx-x on top of countries list */
 
 .hrLine::after {
     content: "";
@@ -38,6 +35,81 @@ th.sticky-header {
     top: 0;
     z-index: 10;
     background-color: #f6f6f7;
-    /*To not have transparent background.
-  background-color: white;*/
+    /* To not have transparent background.
+  background-color: white; */
 }
+
+/* CUSTOM CHECKBOX */
+/* ============================================= */
+
+/* Create a custom checkbox */
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: 1px solid gray;
+    border-radius: 3px;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: green;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 4px;
+    top: 2px;
+    width: 9px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+/* ============================================== */

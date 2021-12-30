@@ -10,7 +10,7 @@
        wire:loading.class.delay="opacity-50">
     <div class="inline-block py-2 m-auto align-middle">
       <div class="m-auto border-b border-gray-200 md:shadow lg:overflow-x-hidden sm:rounded-lg x-scroller md:width90">
-        <table class="w-full border border-t-4 divide-y divide-gray-200 shadow content border-tableHeader">
+        <table class="w-full divide-y divide-gray-200 shadow content ">
           <thead class="bg-gray-100 h-14">
             <tr>
               <x-utils.tHead text="Location"
