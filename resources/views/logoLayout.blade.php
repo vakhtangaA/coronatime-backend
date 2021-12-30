@@ -70,7 +70,7 @@
         <ul x-show="open"
             style="display: none"
             @click.away="open = false"
-            class="absolute z-10 p-3 bg-white border border-gray-100 rounded-lg shadow-lg right-3 top-16 h-28 w-28">
+            class="absolute z-10 p-3 bg-white border border-gray-100 rounded-lg shadow-lg right-3 top-16 h-14 w-28">
           @auth
             <li>
               <form action='{{ route('logout', app()->getLocale()) }}'

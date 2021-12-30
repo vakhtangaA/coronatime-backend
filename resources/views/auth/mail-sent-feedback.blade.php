@@ -4,7 +4,7 @@
          class="self-start mt-4 ml-6 md:mt-12 md:ml-0 md:self-center" />
     <div class="flex flex-col items-center m-auto">
       <img src="{{ asset('images/icons8-checked 1.png') }}" />
-      <p class="px-4 text-center ">
+      <p class="px-4 mt-6 text-center ">
         {{ __($text) }}
       </p>
       @if ($button)

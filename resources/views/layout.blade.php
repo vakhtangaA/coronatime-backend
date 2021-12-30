@@ -63,13 +63,12 @@
 
 
   @if (Route::is('login') || Route::is('register'))
-
     @if (session()->has('error'))
       <div x-data="{show: true, count: 0}"
            class="absolute flex items-center p-3 font-semibold text-white bg-red-400 rounded-md bottom-4 left-4"
            x-init="setTimeout(() => show = false, 4000)"
            x-show="show">
-        <x-svgs.success />
+        <x-svgs.ban />
         <p class="ml-2 text-xs">
           {{ __(session('error')) }}
         </p>
@@ -81,7 +80,7 @@
            class="absolute flex items-center p-3 font-semibold text-white bg-red-400 rounded-md bottom-4 right-4"
            x-init="setTimeout(() => show = false, 4000)"
            x-show="show">
-        <x-svgs.success />
+        <x-svgs.ban />
         <p class="ml-2 text-xs">
           {{ __(session('error')) }}
         </p>
