@@ -29,7 +29,7 @@ class ForgotPassword extends Component
 
 		return $status === Password::RESET_LINK_SENT
 			? redirect()->route('passwordReset.notice', app()->getLocale())
-			: back()->with('error', 'We can not send an email');
+			: redirect()->route('password.email', app()->getLocale())->with('error', $status);
 	}
 
 	public function render()

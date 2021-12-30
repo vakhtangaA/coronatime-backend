@@ -55,5 +55,6 @@
     "Your password is changed, you can sign in": "თქვენი პაროლი შეცვლილია, შეგიძლია შეხვიდეთ სისტემაში",
     "Your password has been reset!": "თქვენი პაროლი აღგენილია",
     "Password reset is not possible, please send password reset email again": "ვერ ხერხდება პაროლის შეცვლა, გთხოვთ კიდევ ერთხელ მოითხოვოთ პაროლის აღდგენის მეილი",
-    "We have sent you a password reset link": "მეილზე გამოგიგზავნეთ პაროლის აღდგენის ბმული"
+    "We have sent you a password reset link": "მეილზე გამოგიგზავნეთ პაროლის აღდგენის ბმული",
+    "We can't find a user with that email address.": "მომხმარებელი ამ მეილით არ არსებობს"
 }

@@ -19,7 +19,7 @@
                        identifier="email"
                        type="email"
                        :text="$email" />
-        @error('email')
+        @error('emaila')
           <x-utils.error :message="$message" />
         @enderror
       </div>
