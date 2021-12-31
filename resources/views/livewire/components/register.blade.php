@@ -62,15 +62,16 @@
         </div>
 
         <div class="flex items-center">
-          <input type="checkbox"
-                 wire:model='remember'
-                 id="remember"
-                 name="remember"
-                 class="w-5 h-5 mr-3 border-none outline-none">
-
-          <label for="remember"
-                 class="my-2 text-sm font-semibold">
-            {{ __('Remember this device') }}</label>
+          <label class="container my-2 text-sm font-semibold">
+            {{ __('Remember this device') }}
+            <input type="checkbox"
+                   checked="checked"
+                   wire:model='remember'
+                   type="checkbox"
+                   id="remember"
+                   name="remember">
+            <span class="checkmark"></span>
+          </label>
         </div>
         <button class="block w-full p-4 my-6 font-black text-white rounded-lg bg-btnColor">
           {{ __('SIGN UP') }}
@@ -86,7 +87,7 @@
     </div>
   </div>
   <div class="hidden h-full lg:block lg:w-2/5">
-    <img src="{{ asset('images/covidvaccinces.png') }}"
+    <img src="{{ asset('images/covidvaccinces-compressed.png') }}"
          class="w-full max-h-screen min-h-screen" />
   </div>
 </div>
