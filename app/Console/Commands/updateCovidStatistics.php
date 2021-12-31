@@ -56,7 +56,7 @@ class updateCovidStatistics extends Command
 				// code tries 5 times to retrieve info, on each iteration, sleep time is increased
 				if (!$countryInfo->has('confirmed'))
 				{
-					sleep($counter * 2);
+					sleep($counter * 5);
 					$counter++;
 
 					if ($counter === 2)
@@ -65,7 +65,7 @@ class updateCovidStatistics extends Command
 						break;
 					}
 				}
-				// sleep(1);
+				sleep(1);
 			}
 			while (!$countryInfo->has('confirmed'));
 
@@ -91,7 +91,6 @@ class updateCovidStatistics extends Command
 			}
 			catch (\Throwable $th)
 			{
-				//throw $th;
 			}
 		}
 
