@@ -28,7 +28,7 @@ class ForgotPassword extends Component
 		);
 
 		return $status === Password::RESET_LINK_SENT
-			? redirect()->route('passwordReset.notice', app()->getLocale())
+			? redirect()->route('passwordReset.notice', app()->getLocale())->with('success', 'Password reset email sent')
 			: redirect()->route('password.email', app()->getLocale())->with('error', $status);
 	}
 

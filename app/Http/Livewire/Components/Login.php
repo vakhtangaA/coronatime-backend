@@ -28,11 +28,19 @@ class Login extends Component
 
 	public function submit()
 	{
-		$validatedData = $this->validate();
+		$this->validate();
 
-		if (Auth::attempt($validatedData, $this->remember))
+		if (filter_var($this->name, FILTER_VALIDATE_EMAIL))
 		{
-			// Authentication passed...
+			Auth::attempt(['email' => $this->name, 'password' => $this->password]);
+		}
+		else
+		{
+			Auth::attempt(['name' => $this->name, 'password' => $this->password]);
+		}
+
+		if (Auth::check())
+		{
 			session()->flash('success', 'Your are now logged in');
 
 			return redirect()->route('dashboard', app()->getLocale());

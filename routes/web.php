@@ -24,10 +24,11 @@ Route::redirect('/', 'en/login')->middleware('guest');
 Route::redirect('/', 'en/')->middleware('auth');
 
 Route::prefix('{language}')->group(function () {
-	// Route::middleware('guest')->group(function () {
-	Route::get('/register', [Register::class, '__invoke'])->name('register');
+	Route::middleware('guest')->group(function () {
+		Route::get('/register', [Register::class, '__invoke'])->name('register');
 
-	Route::get('/login', [Login::class, '__invoke'])->name('login');
+		Route::get('/login', [Login::class, '__invoke'])->name('login');
+	});
 
 	Route::view('/email/verify', 'auth.mail-sent-feedback', ['button' => true, 'text' => 'We have sent you a confirmation email'])->name('verification.notice');
 
@@ -43,7 +44,6 @@ Route::prefix('{language}')->group(function () {
 	Route::get('/reset-password/{token}', [ResetPassword::class, '__invoke'])->name('password.reset');
 
 	Route::get('/forgot-password', [ForgotPassword::class, '__invoke'])->name('password.email');
-	// });
 
 	Route::middleware('auth')->group(function () {
 		Route::get('/', [CountryController::class, 'index'])->name('dashboard');
