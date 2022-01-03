@@ -58,5 +58,7 @@
     "We have sent you a password reset link": "მეილზე გამოგიგზავნეთ პაროლის აღდგენის ბმული",
     "We can't find a user with that email address.": "მომხმარებელი ამ მეილით არ არსებობს",
     "Password reset email sent": "პაროლის აღდგენის მეილი გამოგზავნილია",
-    "No countries were found...": "ქვეყნები ვერ მოიძებნა..."
+    "No countries were found...": "ქვეყნები ვერ მოიძებნა...",
+    "Username or Email": "სახელი ან მეილი",
+    "Enter unique username or email": "შეიყვანეთ თქვენი სახელი ან მეილი"
 }
