@@ -50,7 +50,7 @@
                 <td colspan="5">
                   <div class="flex items-center justify-center p-8 py-32">
                     <p class="text-2xl font-bold opacity-70">
-                      No countries were found...
+                      {{ __('No countries were found...') }}
                     </p>
                   </div>
                 </td>

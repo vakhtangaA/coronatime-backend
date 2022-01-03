@@ -16,8 +16,8 @@
         @csrf
 
         <div class="mb-10">
-          <x-utils.input label="Username"
-                         placeholder="Enter unique username"
+          <x-utils.input label="Username or Email"
+                         placeholder="Enter unique username or email"
                          identifier="name"
                          type="text"
                          :text="$name" />

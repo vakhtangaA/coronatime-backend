@@ -8,7 +8,6 @@
       {{ __('Reset Password') }}
     </h2>
     <form wire:submit.prevent='submit'
-          {{-- action="{{ route('password.update', app()->getLocale()) }}" --}}
           class="w-full"
           method="POST">
       @csrf
