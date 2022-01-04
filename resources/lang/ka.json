@@ -60,5 +60,8 @@
     "Password reset email sent": "პაროლის აღდგენის მეილი გამოგზავნილია",
     "No countries were found...": "ქვეყნები ვერ მოიძებნა...",
     "Username or Email": "სახელი ან მეილი",
-    "Enter unique username or email": "შეიყვანეთ თქვენი სახელი ან მეილი"
+    "Enter unique username or email": "შეიყვანეთ თქვენი სახელი ან მეილი",
+    "Are you sure you want to logout?": "ნამდვილად გსურთ გასვლა?",
+    "Logout": "გასვლა",
+    "Cancel": "გაუქმება"
 }
