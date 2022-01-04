@@ -22,7 +22,7 @@
               <li @click="component = 'worldwide'"
                   class="pb-4 cursor-pointer"
                   :class="component === 'worldwide' ? 'font-bold border-b-4 border-gray-800' : ''">
-                {{ __('Dashboard') }}
+                {{ __('Worldwide') }}
               </li>
               <li @click="component = 'byCountry'"
                   class="pb-4 cursor-pointer"
