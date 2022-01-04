@@ -27,7 +27,7 @@ class SessionTest extends TestCase
 
 		$this->assertAuthenticated();
 
-		$response = $this->actingAs($user)->post(route('logout'));
+		$response = $this->actingAs($user)->post(route('logout', 'en'));
 
 		$this->assertGuest();
 	}

@@ -8,7 +8,7 @@
         {{ __($text) }}
       </p>
       <a class="block w-full"
-         href="{{ route('afterVerify', app()->getLocale()) }}">
+         href="{{ route('login', app()->getLocale()) }}">
         <button class="block w-full p-4 mt-12 font-black text-white rounded-lg lg:mt-24 bg-btnColor">
           {{ __('LOG IN') }}
         </button>

@@ -14,7 +14,7 @@ class UserRegistrationTest extends TestCase
 
 	public function test_register_page_is_rendered()
 	{
-		$response = $this->get('/register');
+		$response = $this->get(route('register', 'en'));
 
 		$response->assertStatus(200);
 		$response->assertSee('Welcome to Coronatime');
@@ -25,7 +25,7 @@ class UserRegistrationTest extends TestCase
 		$user = User::factory()->create();
 		$this->actingAs($user);
 
-		$response = $this->get(route('register'));
+		$response = $this->get(route('register', 'en'));
 
 		$response->assertDontSee('Welcome to Coronatime');
 		$response->assertRedirect('/');
@@ -51,6 +51,19 @@ class UserRegistrationTest extends TestCase
 			->set('password', '12345678')
 			->set('password_confirmation', '432546436')
 			->call('submit')
-			->assertHasErrors('password');
+			->assertHasErrors(['password' => 'confirmed']);
+	}
+
+	public function test_user_registration_is_not_possible_when_passwords_dont_match_in_Georgian()
+	{
+		app()->setLocale('ka');
+
+		Livewire::test(Register::class)
+			->set('name', 'admin')
+			->set('email', 'fdagfa')
+			->set('password', '12345678')
+			->set('password_confirmation', '432546436')
+			->call('submit')
+			->assertHasErrors(['password' => 'confirmed']);
 	}
 }

@@ -38,7 +38,7 @@ class PasswordResetNotification extends Notification
 		return ['mail'];
 	}
 
-	/**
+	/*
 	 * Get the mail representation of the notification.
 	 *
 	 * @param mixed $notifiable
@@ -48,22 +48,7 @@ class PasswordResetNotification extends Notification
 	public function toMail($url)
 	{
 		return (new MailMessage)
-					->line('The introduction to the notification.')
 					->action(Lang::get('Reset Password'), $url)
-					->view('notifications.password', ['token' =>  $this->token, 'email' => $this->email])
-					->line('Thank you for using our application!');
-	}
-
-	/**
-	 * Get the array representation of the notification.
-	 *
-	 * @param mixed $notifiable
-	 *
-	 * @return array
-	 */
-	public function toArray($notifiable)
-	{
-		return [
-		];
+					->view('notifications.password', ['token' =>  $this->token, 'email' => $this->email]);
 	}
 }

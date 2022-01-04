@@ -54,11 +54,6 @@ class VerificationMail extends VerifyEmail
 	 */
 	public function verificationUrl($notifiable)
 	{
-		if (static::$createUrlCallback)
-		{
-			return call_user_func(static::$createUrlCallback, $notifiable);
-		}
-
 		return URL::temporarySignedRoute(
 			'verification.verify',
 			Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),

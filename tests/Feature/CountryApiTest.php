@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Console\Commands\updateCovidStatistics;
 use App\Models\Country;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class CountryApiTest extends TestCase
@@ -21,7 +20,7 @@ class CountryApiTest extends TestCase
 		$countries = updateCovidStatistics::fetchCovidInfo();
 
 		$this->assertIsIterable($countries);
-		$this->assertCount(101, $countries);
+		$this->assertCount(3, $countries);
 	}
 
 	public function test_country_is_created_when_it_is_not_in_database()
@@ -48,25 +47,10 @@ class CountryApiTest extends TestCase
 		]);
 	}
 
-	// public function test_fetching_api_repeats_reuest_five_times_if_there_is_not_response()
-	// {
-	// 	Http::fake([
-	// 		'https://devtest.ge/countries' => Http::response(
-	// 			json_decode(file_get_contents('tests/stubs/response_countries_200.json'), true),
-	// 			200
-	// 		),
-	// 	]);
+	public function test_fetching_api_repeats_request_five_times_if_there_is_not_response()
+	{
+		$this->fakeHttpWithNoData();
 
-	// 	Http::fake([
-	// 		'https://devtest.ge/get-country-statistics' => Http::response(
-	// 			json_decode(
-	// 				'{}',
-	// 				true
-	// 			),
-	// 			200
-	// 		),
-	// 	]);
-
-	// 	$this->artisan('command:updateCovidStatistics')->assertExitCode(0);
-	// }
+		$this->artisan('command:updateCovidStatistics')->assertExitCode(1)->assertSuccessful();
+	}
 }

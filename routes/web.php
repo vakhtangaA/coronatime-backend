@@ -37,9 +37,7 @@ Route::prefix('{language}')->group(function () {
 	Route::view('verified/email', 'auth.verified', ['text' => 'Your account is confirmed, you can sign in'])->name('account.verified.notice');
 	Route::view('reseted/password', 'auth.verified', ['text' => 'Your password is changed, you can sign in'])->name('passwordReseted');
 
-	Route::post('/email/verification-notification', [VerificationController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-	Route::get('/verify/after', [VerificationController::class, 'afterVerification'])->name('afterVerify');
+	Route::post('/email/verification-notification', [VerificationController::class, 'resend'])->name('verification.send');
 
 	Route::get('/reset-password/{token}', [ResetPassword::class, '__invoke'])->name('password.reset');
 

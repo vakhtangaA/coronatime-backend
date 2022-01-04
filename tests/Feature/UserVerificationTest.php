@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use Livewire\Livewire;
-// use App\Notifications\VerificationMail;
 use App\Http\Livewire\Components\Register;
 use App\Notifications\VerificationMail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,16 +14,9 @@ class UserVerificationTest extends TestCase
 {
 	use RefreshDatabase;
 
-	/**
-	 * A basic feature test example.
-	 *
-	 * @return void
-	 */
 	public function test_user_recieves_an_email_for_verification_when_registered()
 	{
 		Notification::fake();
-
-		Notification::assertNothingSent();
 
 		Livewire::test(Register::class)
 			->set('name', 'admin')
@@ -57,5 +49,20 @@ class UserVerificationTest extends TestCase
 		$this->actingAs($user)->get($uri);
 
 		$this->assertNotEquals(null, $user->email_verified_at);
+	}
+
+	public function test_user_can_resend_verification_mail()
+	{
+		$user = User::factory()->create();
+
+		$response = $this->get(route('verification.notice', 'en'));
+
+		$response->assertSee('SEND AGAIN');
+
+		$this->assertGuest();
+
+		$response = $this->actingAs($user)->post(route('verification.send', 'en'));
+
+		$response->assertSessionHas('success', 'Verification link sent!');
 	}
 }

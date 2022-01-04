@@ -14,7 +14,7 @@ class UserLoginTest extends TestCase
 
 	public function test_register_page_is_rendered()
 	{
-		$response = $this->get(route('login'));
+		$response = $this->get(route('login', 'en'));
 
 		$response->assertSuccessful();
 		$response->assertSee('Welcome back');
@@ -25,7 +25,7 @@ class UserLoginTest extends TestCase
 		$user = User::factory()->create();
 		$this->actingAs($user);
 
-		$response = $this->get(route('login'));
+		$response = $this->get(route('login', 'en'));
 
 		$response->assertDontSee('Welcome back');
 		$response->assertRedirect('/');
@@ -56,6 +56,6 @@ class UserLoginTest extends TestCase
 			->set('name', $user->name)
 			->set('password', 'passwordaa')
 			->call('submit')
-			->assertRedirect(route('login'));
+			->assertRedirect(route('login', 'en'));
 	}
 }

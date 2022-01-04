@@ -23,9 +23,4 @@ class VerificationController extends Controller
 
 		return back()->with('success', 'Verification link sent!');
 	}
-
-	public function afterVerification()
-	{
-		return redirect()->route('login', app()->getLocale());
-	}
 }
