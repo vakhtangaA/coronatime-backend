@@ -1,4 +1,4 @@
-<div class="flex flex-col">
+<div class="flex flex-col byCountry">
   <div class="relative w-fit md:my-10 lg:mt-0 lg:mb-10">
     <input wire:model='search'
            type="search"
