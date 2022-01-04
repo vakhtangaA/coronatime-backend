@@ -43,15 +43,17 @@
             <span class="pr-4 mx-2 font-bold border-r border-gray-300">{{ auth()->user()->name }}</span>
           </div>
 
-
-          <form action='{{ route('logout', app()->getLocale()) }}'
-                method="POST"
-                class="hidden md:block">
-            @csrf
-            <button type="submit">
+          <div x-data="{ show: false}">
+            <button @click="show = !show"
+                    class="hidden md:block">
               {{ __('Log Out') }}
             </button>
-          </form>
+            <div x-show="show"
+                 style="display: none"
+                 class="z-50">
+              <x-utils.logout-modal />
+            </div>
+          </div>
         @endauth
         @guest
           <ul class="hidden ml-10 md:flex">
@@ -73,15 +75,18 @@
             class="absolute z-10 p-3 bg-white border border-gray-100 rounded-lg shadow-lg right-3 top-16 h-14 w-28">
           @auth
             <li>
-              <form action='{{ route('logout', app()->getLocale()) }}'
-                    method="POST"
-                    class="md:block">
-                @csrf
-                <button type="submit"
+              <div x-data="{ show: false}">
+                <button @click="show = !show"
+                        type="submit"
                         class="text-red-400 hover:text-red-500">
                   {{ __('Log Out') }}
                 </button>
-              </form>
+                <div x-show="show"
+                     style="display: none"
+                     class="z-50">
+                  <x-utils.logout-modal />
+                </div>
+              </div>
             </li>
           @endauth
           @guest

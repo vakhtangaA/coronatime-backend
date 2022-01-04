@@ -41,6 +41,7 @@
           @livewire('components.by-country')
         </div>
         <div x-show="component === 'worldwide'"
+             style="display: none"
              class="w-full">
           <x-worldwide :statistics="$statistics" />
         </div>
