@@ -67,7 +67,7 @@
       </form>
     </div>
   </div>
-  <div class="hidden h-full lg:block lg:w-2/5">
+  <div class="hidden h-full lg:block lg:w-2/5 logo">
     <img src="{{ asset('images/covidvaccinces-compressed.png') }}"
          class="w-full max-h-screen min-h-screen" />
   </div>

@@ -113,3 +113,7 @@ th.sticky-header {
     transform: rotate(45deg);
 }
 /* ============================================== */
+
+.logo {
+    max-width: 604px;
+}
