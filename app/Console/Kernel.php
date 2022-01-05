@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,11 +17,10 @@ class Kernel extends ConsoleKernel
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		$schedule->command('command:updateCovidStatistics')->everyMinute()->after(function () {
-			dd('ddsad');
+		Log::info('Fetching Covid Statistics Started');
+		$schedule->command('command:updateCovidStatistics')->daily()->after(function () {
+			Log::info('Fetching Covid Statistics Ended');
 		});
-		$schedule->command('schedule-monitor:sync')->dailyAt('04:56');
-		$schedule->command('schedule-monitor:clean')->daily();
 	}
 
 	/**
