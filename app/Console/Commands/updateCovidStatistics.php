@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Country;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
 class updateCovidStatistics extends Command
@@ -32,11 +33,16 @@ class updateCovidStatistics extends Command
 		parent::__construct();
 	}
 
-	public static function fetchCovidInfo(): array
+	protected function fetchCountries(): Collection
 	{
 		$response = Http::get('https://devtest.ge/countries');
 
-		$countries = $response->collect();
+		return $response->collect();
+	}
+
+	protected function fetchCovidInfo(): array
+	{
+		$countries = $this->fetchCountries();
 
 		$AllCountryInfo = [];
 		$counter = 1;
@@ -44,44 +50,45 @@ class updateCovidStatistics extends Command
 		// retrieve covid statistics for all countries returned from above api and
 		// collect them in $AllCountryInfo array,
 		// also append name and country code to that info for updateDatabase method
-		foreach ($countries as $key => $country)
+		foreach ($countries as $country)
 		{
-			do
+			try
 			{
-				$countryInfo = Http::post('https://devtest.ge/get-country-statistics', [
-					'code' => $country['code'],
-				])->collect();
-
-				// if api doesn't respond with country info,
-				// code tries 5 times to retrieve info, on each iteration, sleep time is increased
-				if (!$countryInfo->has('confirmed'))
+				do
 				{
-					sleep($counter * 5);
-					$counter++;
+					$countryInfo = Http::post('https://devtest.ge/get-country-statistics', [
+						'code' => $country['code'],
+					])->collect();
 
-					if ($counter === 2)
+					// if api doesn't respond with country info,
+					// code tries 5 times to retrieve info, on each iteration, sleep time is increased
+					if (!$countryInfo->has('confirmed'))
 					{
-						$counter = 0;
-						break;
+						sleep($counter * 5);
+						$counter++;
+
+						if ($counter === 6)
+						{
+							$counter = 0;
+							break;
+						}
 					}
+					sleep(1);
 				}
-				sleep(1);
+				while (!$countryInfo->has('confirmed'));
 			}
-			while (!$countryInfo->has('confirmed'));
-
-			$countryInfo = Http::post('https://devtest.ge/get-country-statistics', [
-				'code' => $country['code'],
-			])->collect();
-
-			$countryNames = [
-				'en' => $country['name']['en'],
-				'ka' => $country['name']['ka'],
-			];
+			catch (\Throwable $th)
+			{
+				info("Can't fetch country info from api");
+			}
 
 			try
 			{
 				array_push($AllCountryInfo, [
-					'name'        => $countryNames,
+					'name'        => [
+						'en' => $country['name']['en'],
+						'ka' => $country['name']['ka'],
+					],
 					'countryCode' => $countryInfo['code'],
 					'confirmed'   => $countryInfo['confirmed'],
 					'recovered'   => $countryInfo['recovered'],
@@ -103,30 +110,7 @@ class updateCovidStatistics extends Command
 
 		foreach ($countries as $countryCovidInfo)
 		{
-			$country = Country::where('countryCode', '=', $countryCovidInfo['countryCode'])->first();
-
-			if ($country)
-			{
-				$country->confirmed = $countryCovidInfo['confirmed'];
-				$country->recovered = $countryCovidInfo['recovered'];
-				$country->critical = $countryCovidInfo['critical'];
-				$country->deaths = $countryCovidInfo['deaths'];
-				$country->save();
-			}
-			else
-			{
-				Country::create([
-					'name' => [
-						'en' => $countryCovidInfo['name']['en'],
-						'ka' => $countryCovidInfo['name']['ka'],
-					],
-					'countryCode' => $countryCovidInfo['countryCode'],
-					'confirmed'   => $countryCovidInfo['confirmed'],
-					'recovered'   => $countryCovidInfo['recovered'],
-					'critical'    => $countryCovidInfo['critical'],
-					'deaths'      => $countryCovidInfo['deaths'],
-				]);
-			}
+			Country::updateOrCreate($countryCovidInfo);
 		}
 	}
 
