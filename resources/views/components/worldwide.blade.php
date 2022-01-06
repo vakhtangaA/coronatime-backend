@@ -7,7 +7,7 @@
         {{ __('New cases') }}
       </h3>
       <h3 class="mt-4 text-3xl font-black text-blue-500 xl:text-4xl">
-        {{ number_format($statistics['confirmed'], 0, '', ',') }}</h3>
+        {{ writeAsThousands($statistics['confirmed']) }}</h3>
     </div>
   </div>
   <div class="grid grid-cols-2 col-span-3 gap-3 md:col-span-2 md:gap-4 2xl:gap-20">
@@ -18,7 +18,7 @@
           {{ __('Recovered') }}
         </h3>
         <h3 class="mt-4 text-3xl font-black text-green-500 xl:text-4xl">
-          {{ number_format($statistics['recovered'], 0, '', ',') }}</h3>
+          {{ writeAsThousands($statistics['recovered']) }}</h3>
       </div>
     </div>
     <div class="flex flex-col items-center justify-between flex-1 col-span-1 rounded-lg py-14 bg-bgDeathCases">
@@ -28,7 +28,7 @@
           {{ __('Deaths') }}
         </h3>
         <h3 class="mt-4 text-3xl font-black text-yellow-500 xl:text-4xl">
-          {{ number_format($statistics['deaths'], 0, '', ',') }}</h3>
+          {{ writeAsThousands($statistics['deaths']) }}</h3>
       </div>
     </div>
   </div>
