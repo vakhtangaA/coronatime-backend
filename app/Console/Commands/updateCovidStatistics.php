@@ -40,7 +40,7 @@ class updateCovidStatistics extends Command
 		return $response->collect();
 	}
 
-	protected function fetchCovidInfo(): array
+	public function fetchCovidInfo(): array
 	{
 		$countries = $this->fetchCountries();
 
@@ -80,6 +80,7 @@ class updateCovidStatistics extends Command
 			catch (\Throwable $th)
 			{
 				info("Can't fetch country info from api");
+				// throw $th;
 			}
 
 			try
@@ -98,6 +99,7 @@ class updateCovidStatistics extends Command
 			}
 			catch (\Throwable $th)
 			{
+				// throw $th;
 			}
 		}
 
@@ -110,7 +112,18 @@ class updateCovidStatistics extends Command
 
 		foreach ($countries as $countryCovidInfo)
 		{
-			Country::updateOrCreate($countryCovidInfo);
+			Country::updateOrCreate(
+				[
+					'countryCode' => $countryCovidInfo['countryCode'],
+				],
+				[
+					'name'        => $countryCovidInfo['name'],
+					'confirmed'   => $countryCovidInfo['confirmed'],
+					'recovered'   => $countryCovidInfo['recovered'],
+					'critical'    => $countryCovidInfo['critical'],
+					'deaths'      => $countryCovidInfo['deaths'],
+				]
+			);
 		}
 	}
 

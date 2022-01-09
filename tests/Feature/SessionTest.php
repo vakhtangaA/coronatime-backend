@@ -6,14 +6,12 @@ use Tests\TestCase;
 use App\Models\User;
 use Livewire\Livewire;
 use App\Http\Livewire\Components\Login;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SessionTest extends TestCase
 {
-	/**
-	 * A basic feature test example.
-	 *
-	 * @return void
-	 */
+	use RefreshDatabase;
+
 	public function test_user_can_logout()
 	{
 		$user = User::factory()->create([

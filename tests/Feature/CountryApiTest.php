@@ -17,7 +17,9 @@ class CountryApiTest extends TestCase
 
 		$this->artisan('command:updateCovidStatistics')->assertExitCode(0);
 
-		$countries = updateCovidStatistics::fetchCovidInfo();
+		$api = new updateCovidStatistics;
+
+		$countries = $api->fetchCovidInfo();
 
 		$this->assertIsIterable($countries);
 		$this->assertCount(3, $countries);
