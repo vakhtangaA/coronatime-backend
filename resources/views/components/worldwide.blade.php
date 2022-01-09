@@ -1,4 +1,4 @@
-<div class="grid w-full grid-cols-3 gap-4 2xl:gap-20">
+<div class="grid w-full grid-cols-3 gap-4 md:gap-4 2xl:gap-20">
   <div
        class="flex flex-col items-center justify-between flex-1 col-span-3 rounded-lg md:col-span-1 span py-14 bg-bgNewCases">
     <img src="{{ asset('images/newCases.svg') }}" />

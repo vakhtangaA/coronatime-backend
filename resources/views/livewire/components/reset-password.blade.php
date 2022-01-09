@@ -1,14 +1,12 @@
 <div class="flex flex-col items-center justify-start h-screen">
   <img src="{{ asset('images/logo.png') }}"
        class="self-start mt-4 ml-6 md:mt-12 md:ml-0 md:self-center" />
-
-
-  <div class="flex flex-col items-center self-center w-full max-w-lg px-4 mt-36 md:w-2/5">
+  <div class="flex flex-col items-center self-center w-full max-w-lg px-4 mt-36 md:w-2/5 grow">
     <h2 class="mb-16 text-3xl font-extrabold">
       {{ __('Reset Password') }}
     </h2>
     <form wire:submit.prevent='submit'
-          class="w-full"
+          class="flex flex-col w-full grow"
           method="POST">
       @csrf
 
@@ -51,7 +49,7 @@
       <div>
       </div>
       <button type="submit"
-              class="block w-full p-4 my-6 font-black text-white rounded-lg bg-btnColor">
+              class="block w-full p-4 my-6 mt-auto font-black text-white rounded-lg md:mt-5 bg-btnColor">
         {{ __('SAVE CHANGES') }}
       </button>
     </form>

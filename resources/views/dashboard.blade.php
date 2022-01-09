@@ -36,7 +36,7 @@
           </nav>
         </div>
         <div x-show="component === 'byCountry'"
-             class="self-center w-full text-center sm:width90"
+             class="self-center w-full sm:width90"
              style="display: none">
           @livewire('components.by-country')
         </div>
