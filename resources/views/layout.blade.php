@@ -8,7 +8,7 @@
 
   <title>Coronatime</title>
 
-  <link href="{{ asset('css/app.css') }}"
+  <link href="{{ asset('css/app1.css') }}"
         rel="stylesheet">
 
   <!-- Fonts -->
