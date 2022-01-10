@@ -56,7 +56,6 @@ class Kernel extends HttpKernel
 	 */
 	protected $routeMiddleware = [
 		'setlocale'        => \App\Http\Middleware\SetDefaultLocaleForUrls::class,
-		'defaultLocale'    => \App\Http\Middleware\SetDefaultLocaleForUrls::class,
 		'auth'             => \App\Http\Middleware\Authenticate::class,
 		'auth.basic'       => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
 		'cache.headers'    => \Illuminate\Http\Middleware\SetCacheHeaders::class,
@@ -83,7 +82,6 @@ class Kernel extends HttpKernel
 		\Illuminate\Routing\Middleware\ThrottleRequests::class,
 		\Illuminate\Routing\Middleware\ThrottleRequestsWithRedis::class,
 		\Illuminate\Session\Middleware\AuthenticateSession::class,
-		\App\Http\Middleware\SetDefaultLocaleForUrls::class,
 		\Illuminate\Routing\Middleware\SubstituteBindings::class,
 		\Illuminate\Auth\Middleware\Authorize::class,
 	];

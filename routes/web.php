@@ -23,7 +23,7 @@ use App\Http\Livewire\Components\ForgotPassword;
 Route::redirect('/', 'en/login')->middleware('guest');
 Route::redirect('/', 'en/')->middleware('auth');
 
-Route::group(['prefix' => '{language}', 'middleware' => ['defaultLocale']], function () {
+Route::group(['prefix' => '{language}'], function () {
 	Route::middleware('guest')->group(function () {
 		Route::get('register', [Register::class, '__invoke'])->name('register');
 
