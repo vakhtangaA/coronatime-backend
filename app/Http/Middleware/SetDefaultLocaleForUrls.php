@@ -20,8 +20,8 @@ class SetDefaultLocaleForUrls
 	{
 		if (!isset($request->language))
 		{
+			URL::defaults(['language' => 'en']);
 		}
-		URL::defaults(['language' => 'en']);
 
 		return $next($request);
 	}
