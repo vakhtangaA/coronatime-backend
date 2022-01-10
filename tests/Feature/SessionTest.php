@@ -25,6 +25,7 @@ class SessionTest extends TestCase
 
 		$this->assertAuthenticated();
 
+		$user->email_verified_at = now();
 		$response = $this->actingAs($user)->post(route('logout', 'en'));
 
 		$this->assertGuest();

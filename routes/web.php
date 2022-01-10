@@ -23,27 +23,25 @@ use App\Http\Livewire\Components\ForgotPassword;
 Route::redirect('/', 'en/login')->middleware('guest');
 Route::redirect('/', 'en/')->middleware('auth');
 
-Route::prefix('{language}')->group(function () {
+Route::group(['prefix' => '{language}', 'middleware' => ['defaultLocale']], function () {
 	Route::middleware('guest')->group(function () {
-		Route::get('/register', [Register::class, '__invoke'])->name('register');
+		Route::get('register', [Register::class, '__invoke'])->name('register');
 
-		Route::get('/login', [Login::class, '__invoke'])->name('login');
+		Route::get('login', [Login::class, '__invoke'])->name('login');
 	});
 
-	Route::view('/email/verify', 'auth.mail-sent-feedback', ['button' => true, 'text' => 'We have sent you a confirmation email'])->name('verification.notice');
+	Route::get('email/verify', [VerificationController::class, 'notifyEmailSent'])->name('verification.notice');
+	Route::get('reset/sent', [VerificationController::class, 'notifyPasswordResetMailSent'])->name('passwordReset.notice');
+	Route::get('verified/email', [VerificationController::class, 'accountIsConfirmed'])->name('account.verified.notice');
+	Route::get('reseted/password', [VerificationController::class, 'passwordIsReseted'])->name('passwordReseted');
 
-	Route::view('/reset/sent', 'auth.mail-sent-feedback', ['button' => false, 'text' => 'We have sent you a password reset link'])->name('passwordReset.notice');
+	Route::post('email/verification-notification', [VerificationController::class, 'resend'])->name('verification.send');
 
-	Route::view('verified/email', 'auth.verified', ['text' => 'Your account is confirmed, you can sign in'])->name('account.verified.notice');
-	Route::view('reseted/password', 'auth.verified', ['text' => 'Your password is changed, you can sign in'])->name('passwordReseted');
+	Route::get('reset-password/{token}', [ResetPassword::class, '__invoke'])->name('password.reset');
 
-	Route::post('/email/verification-notification', [VerificationController::class, 'resend'])->name('verification.send');
+	Route::get('forgot-password', [ForgotPassword::class, '__invoke'])->name('password.email');
 
-	Route::get('/reset-password/{token}', [ResetPassword::class, '__invoke'])->name('password.reset');
-
-	Route::get('/forgot-password', [ForgotPassword::class, '__invoke'])->name('password.email');
-
-	Route::middleware('auth')->group(function () {
+	Route::middleware(['auth', 'verified'])->group(function () {
 		Route::get('/', [CountryController::class, 'index'])->name('dashboard');
 		Route::post('logout', [SessionController::class, 'destroy'])->name('logout');
 	});

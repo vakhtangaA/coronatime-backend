@@ -32,6 +32,10 @@ class ForgotPasswordTest extends TestCase
 		->assertHasNoErrors()
 		->assertRedirect(route('passwordReset.notice', 'en'));
 
+		$response = $this->get(route('passwordReset.notice', 'en'));
+
+		$response->assertSee('We have sent you a password reset link');
+
 		$notification = new PasswordResetNotification($token, $user->email);
 
 		$notification->toMail($user);

@@ -33,14 +33,13 @@ class ResetPasswordTest extends TestCase
 
 		$this->assertGuest();
 
-		$this->get(route('password.reset', ['language' => 'en', 'token' => $token]));
-
 		Livewire::test(ResetPassword::class)
 			->set('email', 'vakhtang.chitauri@gmail.com')
 			->set('token', $token)
 			->set('password', 'new-password')
 			->set('password_confirmation', 'new-password')
-			->call('submit');
+			->call('submit')
+			->assertRedirect(route('passwordReseted', 'en'));
 
 		Livewire::test(Login::class)
 			->set('name', 'vakhtang.chitauri@gmail.com')
@@ -78,5 +77,9 @@ class ResetPasswordTest extends TestCase
 			->set('password_confirmation', 'old-password')
 			->call('submit')
 			->assertHasErrors();
+
+		$response = $this->get(route('passwordReseted', 'en'));
+
+		$response->assertSee('Your password is changed, you can sign in');
 	}
 }

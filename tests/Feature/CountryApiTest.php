@@ -22,7 +22,7 @@ class CountryApiTest extends TestCase
 		$countries = $api->fetchCovidInfo();
 
 		$this->assertIsIterable($countries);
-		$this->assertCount(3, $countries);
+		$this->assertCount(4, $countries);
 	}
 
 	public function test_country_is_created_when_it_is_not_in_database()

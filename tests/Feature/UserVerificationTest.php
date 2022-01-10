@@ -23,7 +23,8 @@ class UserVerificationTest extends TestCase
 			->set('email', 'vakhtang.chitauri@gmail.com')
 			->set('password', '12345678')
 			->set('password_confirmation', '12345678')
-			->call('submit');
+			->call('submit')
+			->assertRedirect(route('verification.notice', 'en'));
 
 		$user = User::latest()->first();
 
@@ -48,12 +49,18 @@ class UserVerificationTest extends TestCase
 
 		$this->actingAs($user)->get($uri);
 
+		$response = $this->get(route('account.verified.notice', 'en'));
+
+		$response->assertSee('Your account is confirmed, you can sign in');
+
 		$this->assertNotEquals(null, $user->email_verified_at);
 	}
 
 	public function test_user_can_resend_verification_mail()
 	{
 		$user = User::factory()->create();
+
+		$user->email_verified_at = now();
 
 		$response = $this->get(route('verification.notice', 'en'));
 

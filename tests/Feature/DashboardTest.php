@@ -14,6 +14,7 @@ class DashboardTest extends TestCase
 	public function test_dashboard_page_is_rendered_when_user_is_logged_in()
 	{
 		$user = User::factory()->create();
+		$user->email_verified_at = now();
 		$response = $this->actingAs($user)->get(route('dashboard', 'en'));
 
 		$response->assertSuccessful();
@@ -49,6 +50,8 @@ class DashboardTest extends TestCase
 			'critical'       => 3,
 			'deaths'         => 4,
 		]);
+
+		$user->email_verified_at = now();
 
 		$response = $this->actingAs($user)->get(route('dashboard', 'en'));
 
