@@ -16,6 +16,7 @@ class ResetPasswordTest extends TestCase
 	public function test_user_can_reset_password()
 	{
 		$user = User::factory()->create([
+			'name'     => 'admin',
 			'email'    => 'vakhtang.chitauri@gmail.com',
 			'password' => 'qwerty123',
 		]);
@@ -42,7 +43,7 @@ class ResetPasswordTest extends TestCase
 			->assertRedirect(route('passwordReseted', 'en'));
 
 		Livewire::test(Login::class)
-			->set('name', 'vakhtang.chitauri@gmail.com')
+			->set('name', 'admin')
 			->set('password', 'new-password')
 			->call('submit');
 

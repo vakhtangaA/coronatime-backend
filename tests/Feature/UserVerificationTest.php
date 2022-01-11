@@ -72,4 +72,13 @@ class UserVerificationTest extends TestCase
 
 		$response->assertSessionHas('success', 'Verification link sent!');
 	}
+
+	public function test_user_is_redirected_to_verification_link_sent_page_when_tries_to_access_dashboard_unverified()
+	{
+		$user = User::factory()->create();
+
+		$response = $this->actingAs($user)->get(route('dashboard', 'en'));
+
+		$response->assertRedirect(route('verification.notice', 'en'));
+	}
 }

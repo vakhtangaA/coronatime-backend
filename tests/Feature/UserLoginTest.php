@@ -2,11 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\Components\Login;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Livewire\Livewire;
 use Tests\TestCase;
+use App\Models\User;
+use Livewire\Livewire;
+use App\Rules\UserDoesNotExist;
+use App\Http\Livewire\Components\Login;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserLoginTest extends TestCase
 {
@@ -44,6 +45,30 @@ class UserLoginTest extends TestCase
 
 		$this->assertAuthenticated();
 		$this->assertAuthenticatedAs($user);
+	}
+
+	public function test_user_login_is_possible_when_user_provided_email_instead_of_name()
+	{
+		$user = User::factory()->create([
+			'password' => 'password',
+		]);
+
+		Livewire::test(Login::class)
+			->set('name', $user->email)
+			->set('password', 'password')
+			->call('submit');
+
+		$this->assertAuthenticated();
+		$this->assertAuthenticatedAs($user);
+	}
+
+	public function test_when_user_tries_to_login_and_is_unregistered_costum_rule_error_is_shown()
+	{
+		Livewire::test(Login::class)
+			->set('name', 'admin@gmail.com')
+			->set('password', 'password')
+			->assertHasErrors(['name' => new UserDoesNotExist])
+			->call('submit');
 	}
 
 	public function test_user_login_is_not_possible_when_credentials_is_not_set_correctly()
