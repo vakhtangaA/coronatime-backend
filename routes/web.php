@@ -21,7 +21,7 @@ use App\Http\Livewire\Components\ForgotPassword;
 */
 
 Route::redirect('/', 'en/login')->middleware('guest');
-Route::redirect('/', 'en/')->middleware('auth');
+Route::redirect('/', 'en/')->middleware('verified');
 
 Route::group(['prefix' => '{language}'], function () {
 	Route::middleware('guest')->group(function () {
@@ -41,7 +41,7 @@ Route::group(['prefix' => '{language}'], function () {
 
 	Route::get('forgot-password', [ForgotPassword::class, '__invoke'])->name('password.email');
 
-	Route::middleware(['auth', 'verified'])->group(function () {
+	Route::middleware(['verified', 'auth'])->group(function () {
 		Route::get('/', [CountryController::class, 'index'])->name('dashboard');
 		Route::post('logout', [SessionController::class, 'destroy'])->name('logout');
 	});
