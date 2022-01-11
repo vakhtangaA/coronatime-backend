@@ -147,8 +147,6 @@ schema made with **https://drawsql.app/**
 
 ![image](https://user-images.githubusercontent.com/71987862/148931106-a3c60aca-ab23-4784-a6db-4791622475e5.png)
 
-See diagram here https://drawsql.app/redberry-9/diagrams/random-movie
-
 ## Resources
 
 [Figma Designs](<https://www.figma.com/file/79XxXXa99QiG5bvjah6cL8/Coronatime-(Copy)?node-id=0%3A1>)
