@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Components;
 
+use App\Rules\UserDoesNotExist;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,7 @@ class Login extends Component
 	public function rules()
 	{
 		return [
-			'name'      => ['required', 'min:3', 'max:255', 'exists:users,email'],
+			'name'      => ['required', 'min:3', 'max:255',  new UserDoesNotExist],
 			'password'  => ['required', 'min:3', 'max:255'],
 		];
 	}
