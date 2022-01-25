@@ -8,6 +8,7 @@
     "Deaths": "გარდაცვლილი",
     "Welcome back": "კეთილი იყოს თქვენი დაბრუნება",
     "Please enter required info to sign up": "გთხოვთ შეავსოთ ქვემოთ მოცემული ველები",
+    "Please enter required info to log in": "გთხოვთ შეავსოთ ქვემოთ მოცემული ველები",
     "Username": "სახელი",
     "Email": "მეილი",
     "Password": "პაროლი",
@@ -63,5 +64,6 @@
     "Enter unique username or email": "შეიყვანეთ თქვენი სახელი ან მეილი",
     "Are you sure you want to logout?": "ნამდვილად გსურთ გასვლა?",
     "Log out": "გასვლა",
-    "Cancel": "გაუქმება"
+    "Cancel": "გაუქმება",
+    "if your are lazy to register": "თუ დარეგისტრირება არ გნებავთ"
 }

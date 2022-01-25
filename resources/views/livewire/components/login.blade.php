@@ -8,9 +8,17 @@
       <h2 class="mb-2 text-xl font-black leading-6">
         {{ __('Welcome back') }}
       </h2>
-      <p class="mb-4 text-gray-400">
-        {{ __('Please enter required info to sign up') }}
+      <p class="mb-2 text-gray-400">
+        {{ __('Please enter required info to log in') }}
       </p>
+      <div class="mb-2 text-gray-400">
+        <span class="italic">
+          {{ __('if your are lazy to register') }}<br />
+        </span>
+        <span class="text-red-300">
+          name: admin, password: admin
+        </span>
+      </div>
       <form wire:submit.prevent="submit"
             method="POST">
         @csrf

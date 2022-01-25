@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Country;
+use Closure;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
@@ -40,48 +41,64 @@ class updateCovidStatistics extends Command
 		return $response->collect();
 	}
 
+	protected function fetchIndividualCountry(array $country)
+	{
+		$counter = 1;
+
+		try
+		{
+			do
+			{
+				$countryInfo = Http::post('https://devtest.ge/get-country-statistics', [
+					'code' => $country['code'],
+				])->collect();
+
+				// if api doesn't respond with country info,
+				// code tries 5 times to retrieve info, on each iteration, sleep time is increased
+				if (!$countryInfo->has('confirmed'))
+				{
+					// sleep($counter * 5);
+					$counter++;
+
+					if ($counter === 6)
+					{
+						$counter = 0;
+						break;
+					}
+				}
+				// sleep(1);
+			}
+			while (!$countryInfo->has('confirmed'));
+		}
+		catch (\Throwable $th)
+		{
+			info("Can't fetch country info from api");
+			// throw $th;
+		}
+
+		return $countryInfo;
+	}
+
 	public function fetchCovidInfo(): array
 	{
 		$countries = $this->fetchCountries();
 
 		$AllCountryInfo = [];
-		$counter = 1;
+
+		// $this->output->createProgressBar(count($countries));
+		$progressBarPoint = 1 / count($countries);
+		$this->output->progressStart(count($countries));
 
 		// retrieve covid statistics for all countries returned from above api and
 		// collect them in $AllCountryInfo array,
 		// also append name and country code to that info for updateDatabase method
 		foreach ($countries as $country)
 		{
-			try
-			{
-				do
-				{
-					$countryInfo = Http::post('https://devtest.ge/get-country-statistics', [
-						'code' => $country['code'],
-					])->collect();
+			// $countryInfo = $this->withProgressBar(100, Closure::fromCallable($this->fetchIndividualCountry($country)));
 
-					// if api doesn't respond with country info,
-					// code tries 5 times to retrieve info, on each iteration, sleep time is increased
-					if (!$countryInfo->has('confirmed'))
-					{
-						sleep($counter * 5);
-						$counter++;
+			$countryInfo = $this->fetchIndividualCountry($country);
 
-						if ($counter === 6)
-						{
-							$counter = 0;
-							break;
-						}
-					}
-					sleep(1);
-				}
-				while (!$countryInfo->has('confirmed'));
-			}
-			catch (\Throwable $th)
-			{
-				info("Can't fetch country info from api");
-				// throw $th;
-			}
+			$this->output->progressAdvance();
 
 			try
 			{
@@ -99,9 +116,14 @@ class updateCovidStatistics extends Command
 			}
 			catch (\Throwable $th)
 			{
-				// throw $th;
+				throw $th;
+				info("Can't fetch country info from api");
 			}
 		}
+
+		$this->output->progressFinish();
+
+		// dd($AllCountryInfo);
 
 		return $AllCountryInfo;
 	}
@@ -134,6 +156,6 @@ class updateCovidStatistics extends Command
 	 */
 	public function handle(): void
 	{
-		$this->updateDatabase();
+		$this->fetchCovidInfo();
 	}
 }
