@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class VerificationController extends Controller
@@ -11,8 +10,6 @@ class VerificationController extends Controller
 	public function index(EmailVerificationRequest $request)
 	{
 		$request->fulfill();
-
-		Auth::logout();
 
 		return redirect()->route('account.verified.notice', app()->getLocale());
 	}

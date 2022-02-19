@@ -17,7 +17,7 @@ class Authenticate extends Middleware
 	{
 		if (!$request->expectsJson())
 		{
-			return route('login', app()->getLocale());
+			return url(env('SPA_URL') . '/login');
 		}
 	}
 }
