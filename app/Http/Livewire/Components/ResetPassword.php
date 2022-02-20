@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Components;
 
-use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Password;
@@ -27,29 +26,14 @@ class ResetPassword extends Component
 	public function rules()
 	{
 		return [
-			'password'  => ['required', 'min:3', 'max:255', 'confirmed'],
+			'password'               => ['required', 'min:3', 'max:255'],
+			'password_confirmation'  => ['required', 'min:3', 'max:255', 'same:password'],
 		];
 	}
 
 	public function updated($propertyName)
 	{
 		$this->validateOnly($propertyName);
-
-		// register form validates input as user types,
-		// everything works as expected, except password confirmation,
-		// this validation error just shows after user submits,
-		// so here i manually add that error and now user can see password_confirmation error during typing
-		if ($propertyName === 'password_confirmation' && $this->password !== $this->password_confirmation)
-		{
-			if (app()->getLocale() === 'ka')
-			{
-				$this->addError('password_confirmation', 'პაროლები არ ემთხვევა ერთმანეთს');
-			}
-			else
-			{
-				$this->addError('password_confirmation', 'The password confirmation does not match.');
-			}
-		}
 	}
 
 	public function submit()
