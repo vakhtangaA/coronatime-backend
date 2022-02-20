@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Components;
 use App\Models\User;
 use App\Notifications\VerificationMail;
 use Livewire\Component;
-use Illuminate\Validation\Rule;
 
 class Register extends Component
 {
@@ -22,8 +21,8 @@ class Register extends Component
 	public function rules()
 	{
 		return [
-			'name'                   => ['required', 'min:3', 'max:255', Rule::unique('users', 'name'), Rule::unique('users', 'name')],
-			'email'                  => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
+			'name'                   => ['required', 'min:3', 'max:255', 'unique:users,name'],
+			'email'                  => ['required', 'email', 'max:255', 'unique:users,email'],
 			'password'               => ['required', 'min:3', 'max:255'],
 			'password_confirmation'  => ['required', 'min:3', 'max:255', 'same:password'],
 		];
