@@ -14,7 +14,7 @@ class updateCovidStatistics extends Command
 	 *
 	 * @var string
 	 */
-	protected $signature = 'command:updateCovidStatistics';
+	protected $signature = 'update:covid-statistics';
 
 	/**
 	 * The console command description.
