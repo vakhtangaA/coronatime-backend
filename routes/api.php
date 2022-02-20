@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\AuthorizationController;
+use App\Http\Controllers\api\StatisticsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('register', [AuthorizationController::class, 'register']);
 Route::post('login', [AuthorizationController::class, 'login']);
+
+Route::get('all-countries', [StatisticsController::class, 'allCountries']);
+Route::get('statistics-sum', [StatisticsController::class, 'statisticsSum']);
