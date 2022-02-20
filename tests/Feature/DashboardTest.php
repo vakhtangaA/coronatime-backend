@@ -33,7 +33,7 @@ class DashboardTest extends TestCase
 	{
 		$user = User::factory()->create();
 
-		$countryOne = Country::create([
+		Country::create([
 			'name'           => 'Georgia',
 			'countryCode'    => 'GE',
 			'confirmed'      => 99,
@@ -42,7 +42,7 @@ class DashboardTest extends TestCase
 			'deaths'         => 396,
 		]);
 
-		$countryTwo = Country::create([
+		Country::create([
 			'name'           => 'Armenia',
 			'countryCode'    => 'AM',
 			'confirmed'      => 1,
