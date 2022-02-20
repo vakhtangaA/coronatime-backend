@@ -11,7 +11,7 @@ class VerificationController extends Controller
 	{
 		$request->fulfill();
 
-		return redirect()->route('account.verified.notice', app()->getLocale());
+		return redirect()->route('account.verified-notice', app()->getLocale());
 	}
 
 	public function resend(Request $request)

@@ -49,7 +49,7 @@ class UserVerificationTest extends TestCase
 
 		$this->actingAs($user)->get($uri);
 
-		$response = $this->get(route('account.verified.notice', 'en'));
+		$response = $this->get(route('account.verified-notice', 'en'));
 
 		$response->assertSee('Your account is confirmed, you can sign in');
 
