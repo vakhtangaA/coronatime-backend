@@ -46,3 +46,5 @@ Route::group(['prefix' => '{language}'], function () {
 		Route::post('logout', [SessionController::class, 'destroy'])->name('logout');
 	});
 });
+
+Route::view('/api/swagger', 'swagger');
