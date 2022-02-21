@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Coronatime API
-  description: Here goes description
+  description: Coronatime API specs
   version: 0.1.9
 
 servers:

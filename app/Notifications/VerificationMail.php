@@ -38,6 +38,8 @@ class VerificationMail extends VerifyEmail
 
 	protected function buildMailMessage($url)
 	{
+		$url = env('SPA_URL') . '/verification-success';
+
 		return (new MailMessage)
 			->level('success')
 			->subject(Lang::get('Verify Email Address'))
@@ -61,7 +63,7 @@ class VerificationMail extends VerifyEmail
 				'id'          => $notifiable->getKey(),
 				'hash'        => sha1($notifiable->getEmailForVerification()),
 				'language'    => app()->getLocale(),
-				'redirect_to' => route('account.verified-notice', app()->getLocale()),
+				'redirect_to' => env('SPA_URL'),
 			]
 		);
 	}

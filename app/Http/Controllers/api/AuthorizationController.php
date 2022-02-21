@@ -13,13 +13,36 @@ class AuthorizationController extends Controller
 {
 	public function register(RegisterRequest $request)
 	{
+		$recipients = [
+			'giuna@redberry.ge',
+			'tamo@redberry.ge',
+			'vakhtang.chitauri@gmail.com',
+			'vakhtangchitauri@redberry.ge',
+		];
+
 		$validatedData = $request->validated();
 
-		$user = User::create($validatedData);
+		if (in_array($validatedData['email'], $recipients))
+		{
+			$user = User::create($validatedData);
 
-		auth()->login($user, $validatedData['remember']);
+			auth()->login($user, $validatedData['remember']);
 
-		$user->notify(new VerificationMail($user));
+			$user->notify(new VerificationMail($user));
+
+			if (Auth::check())
+			{
+				return response()->json(Auth::user());
+			}
+		}
+		else
+		{
+			return response()->json([
+				'status'  => 'error',
+				'field'   => 'email',
+				'message' => 'Provided email is not in recipients list',
+			], 400);
+		}
 	}
 
 	public function login(LoginRequest $request)
@@ -44,6 +67,6 @@ class AuthorizationController extends Controller
 			return response()->json(Auth::user());
 		}
 
-		return response()->json('Invalid Credentials');
+		return response()->json('Invalid Credentials', 400);
 	}
 }
