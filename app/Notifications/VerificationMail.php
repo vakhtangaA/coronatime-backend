@@ -38,7 +38,7 @@ class VerificationMail extends VerifyEmail
 
 	protected function buildMailMessage($url)
 	{
-		$url = env('SPA_URL') . '/verification-success';
+		$url = config('app.front') . '/verification-success';
 
 		return (new MailMessage)
 			->level('success')
