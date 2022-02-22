@@ -22,6 +22,7 @@
     "dependencies": {
         "@alpinejs/persist": "^3.7.1",
         "alpinejs": "^3.7.0",
+        "react-cookie": "^4.1.1",
         "swagger-ui": "^4.5.1"
     }
 }

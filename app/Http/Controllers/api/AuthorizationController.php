@@ -69,4 +69,23 @@ class AuthorizationController extends Controller
 
 		return response()->json('Invalid Credentials', 400);
 	}
+
+	public function logout()
+	{
+		Auth::guard('web')->logout();
+	}
+
+	public function isLogged()
+	{
+		if (Auth::check())
+		{
+			return response()->json([
+				'isLoggedIn' => true,
+			]);
+		}
+
+		return response()->json([
+			'isLoggedIn' => false,
+		]);
+	}
 }
