@@ -12,7 +12,7 @@
     <p>
       {{ __('click this button to recover a password') }}
     </p>
-    <a href="{{ route('password.reset', ['language' => app()->getLocale(), 'token' => $token, 'email' => $email]) }}">
+    <a href="{{ $spaUrl }}">
       <button
               style="background-color: #0FBA68; padding: 1rem; color: whitesmoke; font-size: 1.2rem; width: 400px; font-weight: 900;border-radius: 10px">
         {{ __('RECOVER PASSWORD') }}

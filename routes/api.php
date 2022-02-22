@@ -25,5 +25,8 @@ Route::post('login', [AuthorizationController::class, 'login']);
 Route::post('logout', [AuthorizationController::class, 'logout']);
 Route::get('is-logged', [AuthorizationController::class, 'isLogged']);
 
+Route::post('forgot-password', [AuthorizationController::class, 'forgotPassword']);
+Route::post('reset-password', [AuthorizationController::class, 'resetPassword']);
+
 Route::get('all-countries', [StatisticsController::class, 'allCountries']);
 Route::get('statistics-sum', [StatisticsController::class, 'statisticsSum']);

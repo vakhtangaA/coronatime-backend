@@ -47,8 +47,9 @@ class PasswordResetNotification extends Notification
 	 */
 	public function toMail($url)
 	{
+		$spaUrl = config('app.front') . '/reset-password/' . $this->token . '?email=' . $this->email;
 		return (new MailMessage)
 					->action(Lang::get('Reset Password'), $url)
-					->view('notifications.password', ['token' =>  $this->token, 'email' => $this->email]);
+					->view('notifications.password', ['spaUrl' => $spaUrl]);
 	}
 }
