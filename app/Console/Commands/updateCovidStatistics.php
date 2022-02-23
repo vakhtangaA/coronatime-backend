@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Models\Country;
 use Illuminate\Console\Command;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
 class updateCovidStatistics extends Command
@@ -33,98 +32,35 @@ class updateCovidStatistics extends Command
 		parent::__construct();
 	}
 
-	protected function fetchCountries(): Collection
+	public function fetchCovidInfo(): array
 	{
 		$response = Http::get('https://devtest.ge/countries');
 
-		return $response->collect();
-	}
-
-	public function fetchCovidInfo(): array
-	{
-		$countries = $this->fetchCountries();
+		$countries = $response->collect();
 
 		$AllCountryInfo = [];
-		$counter = 1;
 
-		// retrieve covid statistics for all countries returned from above api and
+		// retrieve covid statistics for all countries, returned from above api and
 		// collect them in $AllCountryInfo array,
 		// also append name and country code to that info for updateDatabase method
 		foreach ($countries as $country)
 		{
-			try
-			{
-				do
-				{
-					$countryInfo = Http::post('https://devtest.ge/get-country-statistics', [
-						'code' => $country['code'],
-					])->collect();
+			$countryInfo = Http::post('https://devtest.ge/get-country-statistics', [
+				'code' => $country['code'],
+			])->collect();
 
-					// if api doesn't respond with country info,
-					// code tries 5 times to retrieve info, on each iteration, sleep time is increased
-					if (!$countryInfo->has('confirmed'))
-					{
-						sleep($counter * 5);
-						$counter++;
+			sleep(2);
 
-						if ($counter === 6)
-						{
-							$counter = 0;
-							break;
-						}
-					}
-					sleep(1);
-				}
-				while (!$countryInfo->has('confirmed'));
-			}
-			catch (\Throwable $th)
-			{
-				info("Can't fetch country info from api");
-				// throw $th;
-			}
-
-			try
-			{
-				array_push($AllCountryInfo, [
-					'name'        => [
-						'en' => $country['name']['en'],
-						'ka' => $country['name']['ka'],
-					],
-					'countryCode' => $countryInfo['code'],
-					'confirmed'   => $countryInfo['confirmed'],
-					'recovered'   => $countryInfo['recovered'],
-					'critical'    => $countryInfo['critical'],
-					'deaths'      => $countryInfo['deaths'],
-				]);
-			}
-			catch (\Throwable $th)
-			{
-				// throw $th;
-			}
+			array_push($AllCountryInfo, [
+				'name'        => [
+					'en' => $country['name']['en'],
+					'ka' => $country['name']['ka'],
+				],
+				...$countryInfo,
+			]);
 		}
 
 		return $AllCountryInfo;
-	}
-
-	protected function updateDatabase(): void
-	{
-		$countries = $this->fetchCovidInfo();
-
-		foreach ($countries as $countryCovidInfo)
-		{
-			Country::updateOrCreate(
-				[
-					'countryCode' => $countryCovidInfo['countryCode'],
-				],
-				[
-					'name'        => $countryCovidInfo['name'],
-					'confirmed'   => $countryCovidInfo['confirmed'],
-					'recovered'   => $countryCovidInfo['recovered'],
-					'critical'    => $countryCovidInfo['critical'],
-					'deaths'      => $countryCovidInfo['deaths'],
-				]
-			);
-		}
 	}
 
 	/**
@@ -134,6 +70,18 @@ class updateCovidStatistics extends Command
 	 */
 	public function handle(): void
 	{
-		$this->updateDatabase();
+		$countries = $this->fetchCovidInfo();
+
+		foreach ($countries as $countryCovidInfo)
+		{
+			Country::updateOrCreate(
+				[
+					'countryCode' => $countryCovidInfo['code'],
+				],
+				collect($countryCovidInfo)
+					->only('name', 'confirmed', 'recovered', 'critical', 'deaths')
+					->toArray()
+			);
+		}
 	}
 }
