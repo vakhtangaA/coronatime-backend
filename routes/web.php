@@ -31,9 +31,9 @@ Route::group(['prefix' => '{language}'], function () {
 	});
 
 	Route::get('email/verify', [VerificationController::class, 'notifyEmailSent'])->name('verification.notice');
-	Route::get('reset/sent', [VerificationController::class, 'notifyPasswordResetMailSent'])->name('passwordReset.notice');
+	Route::get('reset/sent', [VerificationController::class, 'notifyPasswordResetMailSent'])->name('password.reset-notice');
 	Route::get('verified/email', [VerificationController::class, 'accountIsConfirmed'])->name('account.verified-notice');
-	Route::get('reseted/password', [VerificationController::class, 'passwordIsReseted'])->name('passwordReseted');
+	Route::get('reseted/password', [VerificationController::class, 'passwordIsReseted'])->name('password.reseted');
 	Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'index'])->middleware(['auth', 'signed'])->name('verification.verify');
 	Route::post('email/verification-notification', [VerificationController::class, 'resend'])->name('verification.send');
 

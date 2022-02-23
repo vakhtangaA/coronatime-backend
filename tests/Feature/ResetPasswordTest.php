@@ -40,7 +40,7 @@ class ResetPasswordTest extends TestCase
 			->set('password', 'new-password')
 			->set('password_confirmation', 'new-password')
 			->call('submit')
-			->assertRedirect(route('passwordReseted', 'en'));
+			->assertRedirect(route('password.reseted', 'en'));
 
 		Livewire::test(Login::class)
 			->set('name', 'admin')
@@ -79,7 +79,7 @@ class ResetPasswordTest extends TestCase
 			->call('submit')
 			->assertHasErrors();
 
-		$response = $this->get(route('passwordReseted', 'en'));
+		$response = $this->get(route('password.reseted', 'en'));
 
 		$response->assertSee('Your password is changed, you can sign in');
 	}

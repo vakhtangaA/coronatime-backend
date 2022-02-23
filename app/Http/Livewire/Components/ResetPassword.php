@@ -59,7 +59,7 @@ class ResetPassword extends Component
 		);
 
 		return $status === Password::PASSWORD_RESET
-		? redirect()->route('passwordReseted', app()->getLocale())
+		? redirect()->route('password.reseted', app()->getLocale())
 		: back()->with('error', 'Password reset is not possible, please send password reset email again');
 	}
 

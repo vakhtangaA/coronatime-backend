@@ -30,9 +30,9 @@ class ForgotPasswordTest extends TestCase
 		->set('email', 'vakhtang.chitauri@gmail.com')
 		->call('submit')
 		->assertHasNoErrors()
-		->assertRedirect(route('passwordReset.notice', 'en'));
+		->assertRedirect(route('password.reset-notice', 'en'));
 
-		$response = $this->get(route('passwordReset.notice', 'en'));
+		$response = $this->get(route('password.reset-notice', 'en'));
 
 		$response->assertSee('We have sent you a password reset link');
 
