@@ -32,55 +32,29 @@ class updateCovidStatistics extends Command
 		parent::__construct();
 	}
 
-	public function fetchCovidInfo(): array
+	public function handle(): void
 	{
-		$response = Http::get('https://devtest.ge/countries');
+		$countries = Http::get('https://devtest.ge/countries')->collect();
 
-		$countries = $response->collect();
-
-		$AllCountryInfo = [];
-
-		// retrieve covid statistics for all countries, returned from above api and
-		// collect them in $AllCountryInfo array,
-		// also append name and country code to that info for updateDatabase method
 		foreach ($countries as $country)
 		{
-			$countryInfo = Http::post('https://devtest.ge/get-country-statistics', [
+			$countryStatistics = Http::post('https://devtest.ge/get-country-statistics', [
 				'code' => $country['code'],
 			])->collect();
 
 			sleep(2);
 
-			array_push($AllCountryInfo, [
-				'name'        => [
-					'en' => $country['name']['en'],
-					'ka' => $country['name']['ka'],
-				],
-				...$countryInfo,
-			]);
-		}
+			$info = collect($countryStatistics)
+					->only('confirmed', 'recovered', 'critical', 'deaths')->toArray();
 
-		return $AllCountryInfo;
-	}
-
-	/**
-	 * Execute the console command.
-	 *
-	 * @return int
-	 */
-	public function handle(): void
-	{
-		$countries = $this->fetchCovidInfo();
-
-		foreach ($countries as $countryCovidInfo)
-		{
 			Country::updateOrCreate(
 				[
-					'countryCode' => $countryCovidInfo['code'],
+					'countryCode' => $country['code'],
 				],
-				collect($countryCovidInfo)
-					->only('name', 'confirmed', 'recovered', 'critical', 'deaths')
-					->toArray()
+				[
+					'name'        => $country['name'],
+					...$info,
+				]
 			);
 		}
 	}

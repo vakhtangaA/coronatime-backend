@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RegisterRequest;
 use App\Notifications\VerificationMail;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\ResetPasswordRequest;
 
@@ -106,13 +105,6 @@ class AuthorizationController extends Controller
 
 	public function resetPassword(ResetPasswordRequest $request)
 	{
-		// $credentials = [
-		// 	'email'                 => $this->email,
-		// 	'password'              => $this->password,
-		// 	'password_confirmation' => $this->password_confirmation,
-		// 	'token'                 => $this->token,
-		// ];
-
 		$data = $request->validated();
 
 		$status = Password::reset(
@@ -123,8 +115,6 @@ class AuthorizationController extends Controller
 				])->setRememberToken(Str::random(60));
 
 				$user->save();
-
-				// event(new PasswordReset($user));
 			}
 		);
 
