@@ -30,14 +30,11 @@ class AuthorizationController extends Controller
 		{
 			$user = User::create($validatedData);
 
-			auth()->login($user, $validatedData['remember']);
-
 			$user->notify(new VerificationMail($user));
 
-			if (Auth::check())
-			{
-				return response()->json(Auth::user());
-			}
+			return response()->json([
+				'message' => 'User created',
+			], 200);
 		}
 		else
 		{

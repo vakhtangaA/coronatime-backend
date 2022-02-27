@@ -42,28 +42,4 @@ class UserRegistrationTest extends TestCase
 
 		$this->assertTrue(User::where('name', '=', 'admin')->exists());
 	}
-
-	public function test_user_registration_is_not_possible_when_passwords_dont_match()
-	{
-		Livewire::test(Register::class)
-			->set('name', 'admin')
-			->set('email', 'fdagfa')
-			->set('password', '12345678')
-			->set('password_confirmation', '432546436')
-			->call('submit')
-			->assertHasErrors(['password' => 'confirmed']);
-	}
-
-	public function test_user_registration_is_not_possible_when_passwords_dont_match_in_Georgian()
-	{
-		app()->setLocale('ka');
-
-		Livewire::test(Register::class)
-			->set('name', 'admin')
-			->set('email', 'fdagfa')
-			->set('password', '12345678')
-			->set('password_confirmation', '432546436')
-			->call('submit')
-			->assertHasErrors(['password' => 'confirmed']);
-	}
 }

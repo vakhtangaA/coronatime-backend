@@ -42,10 +42,10 @@ class updateCovidStatistics extends Command
 				'code' => $country['code'],
 			])->collect();
 
-			sleep(2);
+			// sleep(2);
 
 			$info = collect($countryStatistics)
-					->only('confirmed', 'recovered', 'critical', 'deaths')->toArray();
+				->only('confirmed', 'recovered', 'critical', 'deaths')->toArray();
 
 			Country::updateOrCreate(
 				[
