@@ -12,7 +12,7 @@
 # Coronatime
 
 <p>
-This is a website for covid statistics. It has two main page, wordlwide, which shows combined statistics from all countries and second page, where you can see individual country statistics, this page provides some tools to search and filter countries based on statistics or country name.
+<mark>This</mark> is a website for covid statistics. It has two main page, wordlwide, which shows combined statistics from all countries and second page, where you can see individual country statistics, this page provides some tools to search and filter countries based on statistics or country name.
     
 Covid Statistics is updated every day, data comes from external [API](https://devtest.ge/api).
     
